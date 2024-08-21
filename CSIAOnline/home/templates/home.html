@@ -1,58 +1,468 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}Reservation Status{% endblock %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CSIA ONLINE</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="../../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="../../static/css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+
+        /* Base styles */
+        body {
+            font-family: "IBM Plex Sans KR", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            background-color: #f8f9fc;
+            color: #5a5c69;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .sidebar {
+            width: 220px;
+            background-color: #2e59d9;
+            padding: 20px 0;
+            position: fixed;
+            height: 100%;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            overflow-x: auto;
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            font-size: 22px;
+            color: #ffffff;
+            margin: 20px 0 20px 20px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0 20px;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 15px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #d1d3e2;
+            font-size: 16px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #4e73df;
+            color: #ffffff;
+        }
+
+        .sidebar .footer {
+            margin-top: auto;
+            padding: 20px;
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: #2e59d9;
+            color: #ffffff;
+            padding: 15px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .navbar .nav-item {
+            margin-right: 20px;
+        }
+
+        .navbar .nav-link {
+            color: #ffffff;
+            font-size: 16px;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .navbar .nav-link:hover {
+            background-color: #4e73df;
+        }
+
+        .navbar-brand {
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .content-wrapper {
+            margin-top: 70px;
+            margin-left: 220px;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; 
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #2e59d9;
+        }
+
+        .btn-primary {
+            background-color: #4e73df;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        .btn-primary:hover {
+            background-color: #2e59d9;
+        }
+
+        .btn-info {
+            background-color: #36b9cc;
+            border: none;
+        }
+
+        .btn-info:hover {
+            background-color: #2c9faf;
+        }
+
+        .btn-submit {
+            background-color: #ff6f61;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #e55a4f;
+        }
+
+        .table-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .table-container {
+            background: white;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 45%;
+        }
+
+        .table th,
+        .table td {
+            text-align: center;
+        }
+
+        .table th {
+            background-color: #4e73df;
+            color: white;
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .form-control-lg {
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.3rem;
+            border: 1px solid #ced4da;
+            background-color: #fff;
+            background-clip: padding-box;
+            box-shadow: inset 0 1px 2px rgb(0 0 0 / 8%);
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        }
+
+        @media (max-width: 850px) {
+        .sidebar {
+            display: none; /* Hide sidebar on smaller screens */
+        }
+
+        .content-wrapper {
+            margin-left: 0; /* Adjust margin when sidebar is hidden */
+        }
+
+        .table-wrapper {
+            flex-direction: column; /* Stack tables vertically */
+        }
+
+        .table-container {
+            width: 100%; /* Make tables full width */
+            margin: 0; /* Remove margin between tables */
+        }
+    }
+
+    /* Media Query for larger screens */
+    @media (min-width: 851px) {
+        .sidebar {
+            display: flex; /* Show sidebar on larger screens */
+        }
+
+        .content-wrapper {
+            margin-left: 220px; /* Restore margin when sidebar is visible */
+        }
+
+        .table-wrapper {
+            flex-direction: row; /* Align tables horizontally */
+        }
+
+        .table-container {
+            width: 45%; /* Adjust width for horizontal alignment */
+            margin: 10px; /* Add margin between tables */
+        }
+    }
+    .navbar-nav {
+        display: flex; /* Use flexbox for horizontal alignment */
+        align-items: center; /* Center the items vertically */
+        justify-content: flex-end; /* Align the items to the right */
+    }
+
+    .navbar-nav .nav-item {
+        display: inline-flex; /* Display each nav item as inline-flex for proper alignment */
+        margin-left: 15px; /* Add spacing between the items */
+    }
+
+    /* Hide specific nav-items on larger screens */
+    @media (min-width: 850px) {
+        .navbar-nav .nav-item {
+            display: none; /* Hide all nav-items by default on larger screens */
+        }
+    }
+
+    /* Show specific nav-items on smaller screens */
+    @media (max-width: 849px) {
+        .navbar-nav .nav-item {
+            display: inline-flex; /* Ensure nav-items are displayed inline-flex on smaller screens */
+        }
+    }
+
+    /* Base styles for card-container */
+    .card-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 20px;
+        width: 100%;
+        padding-top: 40px;
+    }
+
+    .card {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        display: flex;
+        flex-direction: column; /* Ensure content stacks vertically */
+        justify-content: space-between; /* Distribute content evenly */
+        height: 100%; /* Make sure the card takes full height of the grid cell */
+    }
 
 
-{% block content %}
+    /* Media query for larger screens */
+    @media (min-width: 851px) {
+        .card-container {
+            display: flex; /* Switch to flexbox layout */
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            height: auto;
+        }
 
-<section id="hero" class="d-flex align-items-center">
-    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
-      <div class="row justify-content-center">
-        <div class="col-xl-7 col-lg-9 text-center">
-          <h1>Making CSIA School life easier</h1>
-          <h2>Made by CSIAOnline team</h2>
-        </div>
+        .card {
+            max-width: calc(25% - 40px); /* Maintain original card sizing */
+            flex: 1 1 calc(25% - 40px);
+        }
+    }
+
+    /* Media query for smaller screens (2x2 grid) */
+    @media (max-width: 850px) {
+        .card-container {
+            display: grid; /* Switch to grid layout */
+            grid-template-columns: 1fr 1fr; /* 2 columns */
+            grid-gap: 20px; /* Space between cards */
+        }
+
+        .card {
+            max-width: 100%; /* Full width within grid cell */
+            height: auto;
+        }
+    }
+
+        
+    </style>
+
+</head>
+
+<body id="page-top">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h2>    </h2>
+        <h2>    </h2>
+
+      <h2>In School</h2>
+      <ul>
+          <li><a class="nav-link" href="/yaja">야자</a></li>
+          <li><a class="nav-link" href="/counsel">상담실(개발중)</a></li>
+          <li><a class="nav-link" value="/club">동아리(개발중)</a></li>
+      </ul>
+      <div class="footer">
+          <ul>
+              <li><a class="nav-link" href="/announce">공지</a></li>
+              <li><a class="nav-link" href="/question">문의</a></li>
+          </ul>
       </div>
-      <div class="text-center">
-        <a href="#about" class="btn-get-started scrollto">Logout</a>
-      </div>
+  </div>
+    <!-- End of Sidebar -->
 
-      <div class="row icon-boxes">
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
-          <div class="icon-box">
-            <div class="icon"><i class="ri-stack-line"></i></div>
-            <h4 class="title"><a href="">Counseling Reservation</a></h4>
-            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-          </div>
-        </div>
+    <!-- Topbar -->
+  <nav class="navbar">
+      <a class="navbar-brand" href="#">CSIA ONLINE</a>
+      <!-- Topbar Navbar -->
+      <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+                <a class="nav-link" value = "/home">
+                    <i class="fas fa-home"></i>
+                    <span>홈</span>
+                </a>
+                <a class="nav-link" value = "/home">
+                    <span>야자</span>
+                </a>
+                <a class="nav-link" value = "/counsel">
+                    <span>상담실(개발중)</span>
+                </a>
+                <a class="nav-link" value = "/club">
+                    <span>동아리(개발중)</span>
+                </a>
+            </li>
+      </ul>
+  </nav>
+  <!-- of Topbar -->
+    <div class="content-wrapper">
+        <section id="hero" class="d-flex align-items-center" style="padding-top: 80px; padding-bottom: 60px;">
+            <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+                <div class="row justify-content-center mb-5">
+                    <div class="col-xl-7 col-lg-9 text-center">
+                        <h1 style="font-size: 2.8rem; color: #0062cc; font-weight: 800;">Welcome, {{ user.student_id }}!</h1>
+                        <h2 style="font-size: 1.5rem; color: #5a5c69; margin-top: 15px;">Your Personalized Dashboard</h2>
+                    </div>
+                </div>
 
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
-          <div class="icon-box" href="http://127.0.0.1:8000">
-            <div class="icon"><i class="ri-palette-line"></i></div>
-            <h4 class="title"><a href="">Yaja Management</a></h4>
-            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-          </div>
-        </div>
+                <div class="card-container" style="width: 100%; padding-top: 40px;">
+                    <!-- Today's Meal Section -->
+                    <div class="card">
+                        <div class="icon" style="font-size: 3rem; color: #0062cc; margin-bottom: 15px;">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h4 style="font-size: 1.4rem; margin-bottom: 10px;">오늘의 급식</h4>
+                        <p style="font-size: 1rem; color: #6c757d;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 맛있습니다.맛있습니다.맛있습니다.맛있습니다.맛있습니다.맛있습니다.맛있습니다.맛있습니다.맛있습니다.맛있습니다.맛있습니다.맛있습니다.맛있습니다.맛있습니다.</p>
+                    </div>
 
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
-          <div class="icon-box">
-            <div class="icon"><i class="ri-command-line"></i></div>
-            <h4 class="title"><a href="">Bus check-in</a></h4>
-            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-          </div>
-        </div>
+                    <!-- Today's Class Section -->
+                    <div class="card">
+                        <div class="icon" style="font-size: 3rem; color: #0062cc; margin-bottom: 15px;">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h4 style="font-size: 1.4rem; margin-bottom: 10px;">오늘의 수업</h4>
+                        <p style="font-size: 1rem; color: #6c757d;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
 
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="500">
-          <div class="icon-box">
-            <div class="icon"><i class="ri-fingerprint-line"></i></div>
-            <h4 class="title"><a href="">Home/Login</a></h4>
-            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-          </div>
-        </div>
+                    <!-- Today's Weather Section -->
+                    <div class="card">
+                        <div class="icon" style="font-size: 3rem; color: #0062cc; margin-bottom: 15px;">
+                            <i class="fas fa-cloud-sun"></i>
+                        </div>
+                        <h4 style="font-size: 1.4rem; margin-bottom: 10px;">오늘의 날씨</h4>
+                        <p style="font-size: 1rem; color: #6c757d;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        
+                    </div>
 
-      </div>
+                    <!-- Today's Assignment Notice Section -->
+                    <div class="card">
+                        <div class="icon" style="font-size: 3rem; color: #0062cc; margin-bottom: 15px;">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h4 style="font-size: 1.4rem; margin-bottom: 10px;">오늘의 수행평가</h4>
+                        <p style="font-size: 1rem; color: #6c757d;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-  </section>
+    <!-- End of Content Wrapper -->
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-{% endblock %}
+
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; CSIA ONLINE 2024</span>
+            </div>
+        </div>
+    </footer>
+    <!-- End of Footer -->
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../../static/js/sb-admin-2.min.js"></script>
+    <script src="../static/home.js"></script>
+    <script>
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default link behavior
+                const value = link.getAttribute('value');
+                if (value) {
+                    window.location.href = apiURL + value;
+                }
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

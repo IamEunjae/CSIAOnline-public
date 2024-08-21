@@ -90,6 +90,20 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
+        .blue-box {
+            background-color: #4e73df;
+            color: white;
+            padding: 20px;
+            width: 75vw; /* 75% of the viewport width */
+            height: 50px; /* 75% of the viewport height */
+            font-size: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
         .navbar {
             width: 100%;
             background-color: #2e59d9;
@@ -293,20 +307,14 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <h2>CSIA ONLINE</h2>
+        <h2>    </h2>
+        <h2>    </h2>
 
         <h2>In School</h2>
         <ul>
             <li><a class="nav-link" href="/yaja">야자</a></li>
-            <li><a class="nav-link" href="/seminar">세미나실></a></li>
-            <li><a class="nav-link" href="/counsel">상담실</a></li>
-        </ul>
-        <h2>기숙사</h2>
-        <ul>
-            <li><a class="nav-link" href="/yaja_after">야자 4교시 신청</a></li>
-            <li><a class="nav-link" href="/trans">택배 확인</a></li>
-            <li><a class="nav-link" href="/help">이것 좀 고쳐주세요</a></li>
-            <li><a class="nav-link" href="/musico">노래방</a></li>
+            <li><a class="nav-link" href="/counsel">상담실(개발중)</a></li>
+            <li><a class="nav-link" value="/club">동아리(개발중)</a></li>
         </ul>
         <div class="footer">
             <ul>
@@ -325,16 +333,16 @@
             <li class="nav-item">
                 <a class="nav-link" value = "/home">
                     <i class="fas fa-home"></i>
-                    <span>Home</span>
+                    <span>홈</span>
                 </a>
                 <a class="nav-link" value = "/home">
-                    <span>Yaja</span>
-                </a>
-                <a class="nav-link" value = "/seminar">
-                    <span>Seminar</span>
+                    <span>야자</span>
                 </a>
                 <a class="nav-link" value = "/counsel">
-                    <span>Counsel</span>
+                    <span>상담실(개발중)</span>
+                </a>
+                <a class="nav-link" value = "/club">
+                    <span>동아리(개발중)</span>
                 </a>
             </li>
         </ul>
@@ -343,7 +351,11 @@
 
     
     <div class="content-wrapper">
+        
         <h1 class="text-center mb-4">야자 일정표</h1>
+        <div class="blue-box">
+            매일 5시 30분 이후 야자 일정 변경은 반영되지 않습니다
+        </div>
         <div class="table-wrapper">
             <div class="table-container">
                 <h2 class="text-center">오늘의 야자</h2>
