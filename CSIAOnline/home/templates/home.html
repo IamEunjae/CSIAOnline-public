@@ -343,14 +343,14 @@
 
       <h2>In School</h2>
       <ul>
-          <li><a class="nav-link" href="/yaja">야자</a></li>
-          <li><a class="nav-link" href="/counsel">상담실(개발중)</a></li>
+          <li><a class="nav-link" value="/yaja">야자</a></li>
+          <li><a class="nav-link" value="/counsel">상담실(개발중)</a></li>
           <li><a class="nav-link" value="/club">동아리(개발중)</a></li>
       </ul>
       <div class="footer">
           <ul>
-              <li><a class="nav-link" href="/announce">공지</a></li>
-              <li><a class="nav-link" href="/question">문의</a></li>
+              <li><a class="nav-link" value="/announce">공지</a></li>
+              <li><a class="nav-link" value="/question">문의</a></li>
           </ul>
       </div>
   </div>
@@ -450,7 +450,8 @@
     <script src="../../static/js/sb-admin-2.min.js"></script>
     <script src="../static/home.js"></script>
     <script>
-
+        var apiURL = "http://127.0.0.1:8000";
+        
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function(event) {
                 event.preventDefault(); // Prevent default link behavior
