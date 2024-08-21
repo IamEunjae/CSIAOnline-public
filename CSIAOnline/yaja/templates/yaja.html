@@ -12,16 +12,19 @@
 
     <!-- Custom fonts for this template-->
     <link href="../../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+        
     <!-- Custom styles for this template-->
     <link href="../../static/css/sb-admin-2.min.css" rel="stylesheet">
     <style>
 
         /* Base styles */
         body {
-            font-family: 'Nunito', sans-serif;
+            font-family: "IBM Plex Sans KR", sans-serif;
+            font-weight: 400;
+            font-style: normal;
             background-color: #f8f9fc;
             color: #5a5c69;
             display: flex;
@@ -45,7 +48,7 @@
         }
 
         .sidebar h2 {
-            font-size: 22px;
+            font-size: 25px;
             color: #ffffff;
             margin: 20px 0 20px 20px;
         }
@@ -63,7 +66,7 @@
         .sidebar ul li a {
             text-decoration: none;
             color: #d1d3e2;
-            font-size: 16px;
+            font-size: 20px;
             display: block;
             padding: 10px;
             border-radius: 5px;
@@ -78,6 +81,13 @@
         .sidebar .footer {
             margin-top: auto;
             padding: 20px;
+        }
+        .instruction-container {
+            margin-top: 20px;
+            background-color: #F4F8FF;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .navbar {
@@ -101,7 +111,7 @@
 
         .navbar .nav-link {
             color: #ffffff;
-            font-size: 16px;
+            font-size: 24px;
             text-decoration: none;
             padding: 10px;
             border-radius: 5px;
@@ -114,7 +124,7 @@
 
         .navbar-brand {
             color: #ffffff;
-            font-size: 22px;
+            font-size: 28px;
             font-weight: bold;
         }
 
@@ -130,7 +140,7 @@
         }
 
         h1 {
-            font-size: 28px;
+            font-size: 40px;
             color: #2e59d9;
         }
 
@@ -138,7 +148,7 @@
             background-color: #4e73df;
             border: none;
             padding: 10px 20px;
-            font-size: 16px;
+            font-size: 20px;
         }
 
         .btn-primary:hover {
@@ -160,7 +170,7 @@
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 22px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
@@ -203,7 +213,7 @@
         }
 
         .form-control-lg {
-            font-size: 1rem;
+            font-size: 1.2rem;
             padding: 0.5rem 1rem;
             border-radius: 0.3rem;
             border: 1px solid #ced4da;
@@ -212,6 +222,69 @@
             box-shadow: inset 0 1px 2px rgb(0 0 0 / 8%);
             transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
         }
+
+        @media (max-width: 850px) {
+        .sidebar {
+            display: none; /* Hide sidebar on smaller screens */
+        }
+
+        .content-wrapper {
+            margin-left: 0; /* Adjust margin when sidebar is hidden */
+        }
+
+        .table-wrapper {
+            flex-direction: column; /* Stack tables vertically */
+        }
+
+        .table-container {
+            width: 100%; /* Make tables full width */
+            margin: 0; /* Remove margin between tables */
+        }
+    }
+
+    /* Media Query for larger screens */
+    @media (min-width: 851px) {
+        .sidebar {
+            display: flex; /* Show sidebar on larger screens */
+        }
+
+        .content-wrapper {
+            margin-left: 220px; /* Restore margin when sidebar is visible */
+        }
+
+        .table-wrapper {
+            flex-direction: row; /* Align tables horizontally */
+        }
+
+        .table-container {
+            width: 45%; /* Adjust width for horizontal alignment */
+            margin: 10px; /* Add margin between tables */
+        }
+    }
+    .navbar-nav {
+        display: flex; /* Use flexbox for horizontal alignment */
+        align-items: center; /* Center the items vertically */
+        justify-content: flex-end; /* Align the items to the right */
+    }
+
+    .navbar-nav .nav-item {
+        display: inline-flex; /* Display each nav item as inline-flex for proper alignment */
+        margin-left: 15px; /* Add spacing between the items */
+    }
+
+    /* Hide specific nav-items on larger screens */
+    @media (min-width: 850px) {
+        .navbar-nav .nav-item {
+            display: none; /* Hide all nav-items by default on larger screens */
+        }
+    }
+
+    /* Show specific nav-items on smaller screens */
+    @media (max-width: 849px) {
+        .navbar-nav .nav-item {
+            display: inline-flex; /* Ensure nav-items are displayed inline-flex on smaller screens */
+        }
+    }
     </style>
 
 </head>
@@ -225,8 +298,8 @@
         <h2>In School</h2>
         <ul>
             <li><a class="nav-link" href="/yaja">야자</a></li>
-            <li><a class="nav-link" href="/semina">Seminar</a></li>
-            <li><a class="nav-link" href="/counsel">Counsel</a></li>
+            <li><a class="nav-link" href="/seminar">세미나실></a></li>
+            <li><a class="nav-link" href="/counsel">상담실</a></li>
         </ul>
         <h2>기숙사</h2>
         <ul>
@@ -245,14 +318,23 @@
     <!-- End of Sidebar -->
 
     <!-- Topbar -->
-    <nav class="navbar">
+        <nav class="navbar">
         <a class="navbar-brand" href="#">CSIA ONLINE</a>
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="start.html">
+                <a class="nav-link" value = "/home">
                     <i class="fas fa-home"></i>
                     <span>Home</span>
+                </a>
+                <a class="nav-link" value = "/home">
+                    <span>Yaja</span>
+                </a>
+                <a class="nav-link" value = "/seminar">
+                    <span>Seminar</span>
+                </a>
+                <a class="nav-link" value = "/counsel">
+                    <span>Counsel</span>
                 </a>
             </li>
         </ul>
@@ -287,6 +369,15 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="instruction-container">
+                    <h2>야자 신청은 이렇게 하면 돼요!</h2>
+                    <p><strong>1. 일정 작성하기:</strong> 아래 요일별로 1교시, 2교시, 3교시 칸에 여러분의 일정을 적어주세요.</p>
+                    <p><strong>2. 신청 확인하기:</strong> 오늘의 야자 일정이 제대로 신청되었는지 확인하려면 오늘의 야자 확인을 꼭 해야 해요!</p>
+                    <p><strong>3. 조퇴 안내:</strong> 야자를 신청할 때, 한 교시라도 조퇴하려면 3교시 모두 조퇴로 신청해야 해요. (기숙사에서 학교로 나올 수 없어요.) 하지만, 조퇴 후 외출이나 현체를 한다면 조퇴와 함께 다른 교시에도 신청할 수 있어요.</p>
+                    <p><strong>4. 일괄 신청:</strong> 한 번 일주일 치 일괄 신청을 하면 다음 주에도 그 내용이 유지돼요. 매주 유지되는 스케줄을 신청할 수 있어요!</p>
+                    <p>이제 쉽고 간단하게 야자 신청해보세요!</p>
+                </div>
+
             </div>
             <div class="table-container">
                 <form id="weekForm" action="/" method="put">
@@ -465,7 +556,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>1교시</td>
+                                    <td>1</td>
                                     <td>
                                         <select class="form-control form-control-lg week-period-select" id="default-period1-Monday" data-period="1" data-day="1">
                                             <option value="야자">야자</option>
@@ -508,7 +599,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>2교시</td>
+                                    <td>2</td>
                                     <td>
                                         <select class="form-control form-control-lg week-period-select" id="default-period2-Monday" data-period="2" data-day="1">
                                             <option value="야자">야자</option>
@@ -551,7 +642,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>3교시</td>
+                                    <td>3</td>
                                     <td>
                                         <select class="form-control form-control-lg week-period-select" id="default-period3-Monday" data-period="3" data-day="1">
                                             <option value="야자">야자</option>
