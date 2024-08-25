@@ -1,4 +1,4 @@
-apiURL = "http://52.79.74.83/";
+const apiURL = "http://52.79.74.83/";
 
 document
   .getElementById("loginForm")

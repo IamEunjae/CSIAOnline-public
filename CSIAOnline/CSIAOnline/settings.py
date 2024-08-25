@@ -46,28 +46,28 @@ INSTALLED_APPS = [
     "yaja",
     "django_celery_results",
     "django_celery_beat",
-    "rest_framework"
+    "rest_framework",
+    "corsheaders",
 ]
 
-CELERY_BROKER_URL = 'redis://localhost:6379'
-accept_content = ['application/json']
-result_serializer = 'json'
-task_serializer = 'json'
-result_backend = 'django-db'
-timezone = 'Asia/Seoul'
+CELERY_BROKER_URL = "redis://localhost:6379"
+accept_content = ["application/json"]
+result_serializer = "json"
+task_serializer = "json"
+result_backend = "django-db"
+timezone = "Asia/Seoul"
 
 
-CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 
 CELERY_BEAT_SCHEDULE = {
-    'run-reset-every-friday': {
-        'task': 'yaja.tasks.run_reset_script',
-        'schedule': crontab(hour=13, minute=59, day_of_week='sat'),
+    "run-reset-every-friday": {
+        "task": "yaja.tasks.run_reset_script",
+        "schedule": crontab(hour=13, minute=59, day_of_week="sat"),
     },
-
-    'run-reset-every-day': {
-        'task': 'yaja.tasks.run_update_script',
-        'schedule': crontab(hour=19, minute=9, day_of_week='thu'),
+    "run-reset-every-day": {
+        "task": "yaja.tasks.run_update_script",
+        "schedule": crontab(hour=19, minute=9, day_of_week="thu"),
     },
 }
 
@@ -89,6 +89,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "CSIAOnline.urls"
@@ -123,6 +124,10 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+CORS_ALLOWED_ORIGINS = [
+    "http://52.79.74.83",
+]
 
 
 # Password validation
@@ -190,8 +195,8 @@ REST_FRAMEWORK = {
 
 
 STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
 STATIC_ROOT = BASE_DIR / "collected_static"

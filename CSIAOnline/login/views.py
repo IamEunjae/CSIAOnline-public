@@ -5,11 +5,12 @@ from django.contrib.auth import login
 from .models import CustomUser
 import json
 
+
 @csrf_exempt
 def custom_login(request):
     if request.method == "POST":
         # Get data from the form
-        data = json.loads(request.body.decode('utf-8'))
+        data = json.loads(request.body.decode("utf-8"))
         student_id = data.get("student_id")
         password = data.get("password")
         print(student_id)
@@ -17,9 +18,7 @@ def custom_login(request):
 
         # Check if there is any matching object in the CustomUser table
         try:
-            user = CustomUser.objects.get(
-                student_id=student_id, password=password
-            )
+            user = CustomUser.objects.get(student_id=student_id, password=password)
             # Log in the user for the current session
             login(request, user)
             # Return a success response
@@ -31,4 +30,4 @@ def custom_login(request):
                 status=400,
             )
 
-    return render(request, "login/login.html")
+    return render(request, "login.html")
