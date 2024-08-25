@@ -1,3 +1,3 @@
 document.addEventListener("DOMContentLoaded", function () {
-  var apiURL = "http://127.0.0.1:8000";
+  var apiURL = "http://52.79.74.83/";
 });

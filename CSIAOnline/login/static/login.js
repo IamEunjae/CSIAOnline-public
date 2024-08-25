@@ -1,4 +1,4 @@
-apiURL = "http://127.0.0.1:8000";
+apiURL = "http://52.79.74.83/";
 
 document
   .getElementById("loginForm")
@@ -26,7 +26,7 @@ document
     })
       .then((response) => {
         if (!response.ok) {
-          alert("Please Check login")
+          alert("Please Check login");
           throw new Error("Login failed");
         }
         return response.json();
