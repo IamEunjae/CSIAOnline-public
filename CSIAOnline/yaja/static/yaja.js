@@ -1,7 +1,7 @@
 // Function to update the entire schedule
 // Function to get the selected value of a dropdown
 
-apiURL = "http://52.79.74.83/";
+apiURL = "http://csiatech.kr/";
 
 function getSelectedValue(dropdownId) {
   let dropdown = document.getElementById(dropdownId);
@@ -652,6 +652,16 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.querySelectorAll(".nav-link").forEach((link) => {
+  link.addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent default link behavior
+    const value = link.getAttribute("value");
+    if (value) {
+      window.location.href = apiURL + value;
+    }
+  });
+});
+
+document.querySelectorAll(".navbar-brand").forEach((link) => {
   link.addEventListener("click", function (event) {
     event.preventDefault(); // Prevent default link behavior
     const value = link.getAttribute("value");

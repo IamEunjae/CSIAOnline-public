@@ -1,4 +1,4 @@
-const apiURL = "http://52.79.74.83/";
+const apiURL = "http://csiatech.kr";
 
 document
   .getElementById("loginForm")
@@ -35,7 +35,7 @@ document
         // Check if the login was successful
         if (data.status === "success") {
           // Redirect to the logout page
-          window.location.href = apiURL + "home";
+          window.location.href = apiURL + "/home";
         } else {
           alert("Please check log in details");
           // Handle login failure (e.g., display an error message)
