@@ -50,7 +50,7 @@ function updateDefaultSchedule() {
   console.log(selectedValues);
 
   // Make the request to the backend API to update the entire schedule
-  fetch(apiURL + "/yaja/", {
+  fetch(apiURL + "yaja/", {
     method: "POST", // Assuming it's always a POST request for updating the entire schedule
     headers: {
       "Content-Type": "application/json",
@@ -77,8 +77,8 @@ function updateDefaultSchedule() {
 }
 
 function retrieveDefaultSchedule() {
-  console.log("Sending GET request to:", apiURL + "/yaja");
-  fetch(apiURL + "/yaja/", {
+  console.log("Sending GET request to:", apiURL + "yaja");
+  fetch(apiURL + "yaja/", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -340,7 +340,7 @@ function updateWeekSchedule() {
   console.log(updatedValues);
 
   // Make the request to the backend API to update this week's schedule
-  fetch(apiURL + "/yaja/", {
+  fetch(apiURL + "yaja/", {
     method: "PUT", // PUT request to update the entire week's schedule
     headers: {
       "Content-Type": "application/json",
@@ -366,7 +366,7 @@ function updateWeekSchedule() {
 
 function retrieveCurrentSchedule() {
   console.log("Sending GET request to:", apiURL + "/yaja");
-  fetch(apiURL + "/yaja/", {
+  fetch(apiURL + "yaja/", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -649,4 +649,168 @@ document.addEventListener("DOMContentLoaded", function () {
       event.preventDefault();
       retrieveDefaultSchedule();
     });
+});
+
+document.querySelectorAll(".nav-link").forEach((link) => {
+  link.addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent default link behavior
+    const value = link.getAttribute("value");
+    if (value) {
+      window.location.href = apiURL + value;
+    }
+  });
+});
+
+document.querySelectorAll(".period-select").forEach((select) => {
+  select.addEventListener("change", function () {
+    const customInputId = `${this.id}-input`;
+    const customInput = document.getElementById(customInputId);
+
+    if (this.value === "기타") {
+      customInput.style.display = "block";
+    } else {
+      customInput.style.display = "none";
+    }
+
+    const day = this.id.split("-")[1];
+    if (this.value === "조퇴") {
+      const period1 = document.getElementById(`period1-${day}`).value;
+      const period2 = document.getElementById(`period2-${day}`).value;
+      const period3 = document.getElementById(`period3-${day}`).value;
+
+      if (period1 !== "외출/현체") {
+        document.getElementById(`period1-${day}`).value = "조퇴";
+      }
+      if (period2 !== "외출/현체") {
+        document.getElementById(`period2-${day}`).value = "조퇴";
+      }
+      if (period3 !== "외출/현체") {
+        document.getElementById(`period3-${day}`).value = "조퇴";
+      }
+    }
+  });
+});
+
+document.querySelectorAll(".week-period-select").forEach((select) => {
+  select.addEventListener("change", function () {
+    const parts = this.id.split("-");
+    const day = parts[2];
+    const customInputId = `default-${parts[1]}-${day}-input`;
+    const customInput = document.getElementById(customInputId);
+
+    if (this.value === "기타") {
+      customInput.style.display = "block";
+    } else {
+      customInput.style.display = "none";
+    }
+
+    if (this.value === "조퇴") {
+      const period1 = document.getElementById(`default-period1-${day}`).value;
+      const period2 = document.getElementById(`default-period2-${day}`).value;
+      const period3 = document.getElementById(`default-period3-${day}`).value;
+
+      if (period1 !== "외출/현체") {
+        document.getElementById(`default-period1-${day}`).value = "조퇴";
+      }
+      if (period2 !== "외출/현체") {
+        document.getElementById(`default-period2-${day}`).value = "조퇴";
+      }
+      if (period3 !== "외출/현체") {
+        document.getElementById(`default-period3-${day}`).value = "조퇴";
+      }
+    }
+  });
+});
+
+document.querySelectorAll(".period-select").forEach((select) => {
+  select.addEventListener("change", function () {
+    const customInputId = `${this.id}-input`;
+    const customInput = document.getElementById(customInputId);
+
+    if (this.value === "기타") {
+      customInput.style.display = "block";
+    } else {
+      customInput.style.display = "none";
+    }
+
+    const day = this.id.split("-")[1];
+    const period = this.id.split("-")[0];
+
+    const period1 = document.getElementById(`period1-${day}`);
+    const period2 = document.getElementById(`period2-${day}`);
+    const period3 = document.getElementById(`period3-${day}`);
+
+    if (this.value === "조퇴") {
+      if (period1.value !== "외출/현체") period1.value = "조퇴";
+      if (period2.value !== "외출/현체") period2.value = "조퇴";
+      if (period3.value !== "외출/현체") period3.value = "조퇴";
+
+      document.getElementById(`period1-${day}-input`).style.display = "none";
+      document.getElementById(`period2-${day}-input`).style.display = "none";
+      document.getElementById(`period3-${day}-input`).style.display = "none";
+    } else if (this.value !== "외출/현체") {
+      if (period1.value === "조퇴" && period !== "period1") {
+        period1.value = "야자";
+        document.getElementById(`period1-${day}-input`).style.display = "none";
+      }
+      if (period2.value === "조퇴" && period !== "period2") {
+        period2.value = "야자";
+        document.getElementById(`period2-${day}-input`).style.display = "none";
+      }
+      if (period3.value === "조퇴" && period !== "period3") {
+        period3.value = "야자";
+        document.getElementById(`period3-${day}-input`).style.display = "none";
+      }
+    }
+  });
+});
+
+document.querySelectorAll(".week-period-select").forEach((select) => {
+  select.addEventListener("change", function () {
+    const parts = this.id.split("-");
+    const day = parts[2];
+    const period = parts[1];
+
+    const customInputId = `default-${period}-${day}-input`;
+    const customInput = document.getElementById(customInputId);
+
+    if (this.value === "기타") {
+      customInput.style.display = "block";
+    } else {
+      customInput.style.display = "none";
+    }
+
+    const period1 = document.getElementById(`default-period1-${day}`);
+    const period2 = document.getElementById(`default-period2-${day}`);
+    const period3 = document.getElementById(`default-period3-${day}`);
+
+    if (this.value === "조퇴") {
+      if (period1.value !== "외출/현체") period1.value = "조퇴";
+      if (period2.value !== "외출/현체") period2.value = "조퇴";
+      if (period3.value !== "외출/현체") period3.value = "조퇴";
+
+      document.getElementById(`default-period1-${day}-input`).style.display =
+        "none";
+      document.getElementById(`default-period2-${day}-input`).style.display =
+        "none";
+      document.getElementById(`default-period3-${day}-input`).style.display =
+        "none";
+    } else if (this.value !== "외출/현체") {
+      if (period1.value === "조퇴" && period !== "period1") {
+        period1.value = "야자";
+        document.getElementById(`default-period1-${day}-input`).style.display =
+          "none";
+      }
+      if (period2.value === "조퇴" && period !== "period2") {
+        period2.value = "야자";
+        document.getElementById(`default-period2-${day}-input`).style.display =
+          "none";
+      }
+      if (period3.value === "조퇴" && period !== "period3") {
+        period3.value = "야자";
+        document.getElementById(`default-period3-${day}-input`).style.display =
+          "none";
+      }
+    }
+  });
 });
