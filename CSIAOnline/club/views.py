@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 
 
 # Create your views here.
-def announce_view(request):
+def club_view(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect("https://csiatech.kr/")
 
