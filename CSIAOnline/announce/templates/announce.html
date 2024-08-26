@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+]<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -218,6 +218,8 @@
             transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
         }
 
+
+
         @media (max-width: 850px) {
         .sidebar {
             display: none; /* Hide sidebar on smaller screens */
@@ -340,7 +342,68 @@
             height: auto;
         }
     }
+ 
+    .announcement-container {
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 40px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .announcement-title {
+        text-align: center;
+        font-size: 28px;
+        color: #2e59d9;
+        margin-bottom: 30px;
+        font-weight: bold;
+    }
+    
+    .announcement-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .announcement-item {
+        padding: 20px;
+        background-color: #f8f9fc;
+        border-left: 4px solid #4e73df;
+        border-radius: 5px;
+    }
+    
+    .announcement-item h3 {
+        margin: 0;
+        font-size: 20px;
+        color: #2e59d9;
+    }
+    
+    .announcement-item p {
+        margin: 10px 0 0;
+        font-size: 16px;
+        color: #5a5c69;
+        line-height: 1.5;
+    }
 
+    @media (max-width: 768px) {
+        .announcement-container {
+            padding: 20px;
+        }
+    
+        .announcement-title {
+            font-size: 24px;
+        }
+    
+        .announcement-item h3 {
+            font-size: 18px;
+        }
+    
+        .announcement-item p {
+            font-size: 14px;
+        }
+    }
         
     </style>
 
@@ -392,130 +455,31 @@
   </nav>
   <!-- of Topbar -->
     <div class="content-wrapper">
-        <section id="hero" class="d-flex align-items-center" style="padding-top: 80px; padding-bottom: 60px;">
-            <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
-                <div class="row justify-content-center mb-5">
-                    <div class="col-xl-7 col-lg-9 text-center">
-                        <h1 style="font-size: 2.8rem; color: #0062cc; font-weight: 800;">Welcome, {{ user.student_id }}!</h1>
-                        <h2 style="font-size: 1.5rem; color: #5a5c69; margin-top: 15px;">Your Personalized Dashboard</h2>
-                    </div>
+        <div class="announcement-container">
+            <h2 class="announcement-title">모집 공고</h2>
+            <div class="announcement-list">
+                <div class="announcement-item">
+                    <h3>UI/UX</h3>
+                    <p>웹 디자인과 유저 경험을 향상시킬 수 있는 사람</p>
                 </div>
-
-                <div class="card-container" style="width: 100%; padding-top: 40px;">
-                    <!-- Today's Meal Section -->
-                    <div class="card">
-                        <div class="icon" style="font-size: 3rem; color: #0062cc; margin-bottom: 15px;">
-                            <i class="fas fa-utensils"></i>
-                        </div>
-                        <h4 style="font-size: 1.4rem; margin-bottom: 10px;">오늘의 급식</h4>
-                        <div style="font-size: 1rem; color: #6c757d; text-align: left;">
-                            <p><strong>아침:</strong> 쌀밥, 된장국, 계란말이, 김치</p>
-                            <p><strong>점심:</strong> 비빔밥, 미역국, 불고기, 콩나물 무침, 김치</p>
-                            <p><strong>저녁:</strong> 칼국수, 만두, 김치, 요구르트</p>
-                        </div>
-                    </div>
-
-                    <!-- Today's Class Section -->
-                    <div class="card">
-                        <div class="icon" style="font-size: 3rem; color: #0062cc; margin-bottom: 15px;">
-                            <i class="fas fa-book-open"></i>
-                        </div>
-                        <h4 style="font-size: 1.4rem; margin-bottom: 10px;">오늘의 수업</h4>
-                        <div style="font-size: 1rem; color: #6c757d; text-align: left;">
-                            <p><strong>1교시:</strong> 수학 - 미적분학</p>
-                            <p><strong>2교시:</strong> 영어 - 영문법</p>
-                            <p><strong>3교시:</strong> 과학 - 물리학</p>
-                            <p><strong>4교시:</strong> 역사 - 세계사</p>
-                            <p><strong>5교시:</strong> 제2외국어 - 스페인어</p>
-                            <p><strong>6교시:</strong> 사회선택 - 거시경제</p>
-                            <p><strong>7교시:</strong> 사회선택 - 거시경제</p>
-                            <p><strong>8교시:</strong> 공강 - 자습</p>
-                        </div>
-                    </div>
-
-                    <!-- Today's Weather Section -->
-                    <div class="card">
-                        <div class="icon" style="font-size: 3rem; color: #0062cc; margin-bottom: 15px;">
-                            <i class="fas fa-cloud-sun"></i>
-                        </div>
-                        <h4 style="font-size: 1.4rem; margin-bottom: 10px;">오늘의 날씨</h4>
-                        <div style="font-size: 1.2rem; color: #333; margin-bottom: 10px;">
-                            <strong>서울</strong> - 맑음
-                        </div>
-                        <div style="font-size: 1.8rem; font-weight: bold; color: #0062cc; margin-bottom: 10px;">
-                            25°C
-                        </div>
-                        <div style="font-size: 1rem; color: #6c757d;">
-                            <p style="margin: 0;">최고: 28°C, 최저: 18°C</p>
-                            <p style="margin: 0;">습도: 60%</p>
-                            <p style="margin: 0;">바람: 남서풍 5km/h</p>
-                        </div>
-                        
-                    </div>
-
-                    <!-- Today's Assignment Notice Section -->
-                    <div class="card" >
-                        <div class="icon" style="font-size: 3rem; color: #0062cc; margin-bottom: 15px;">
-                            <i class="fas fa-clipboard-check"></i>
-                        </div>
-                        <h4 style="font-size: 1.4rem; margin-bottom: 10px;">오늘의 수행평가</h4>
-                        
-                        <!-- 여러 수행평가 간략한 내용 -->
-                        <div class="evaluation-box" style="padding: 10px; background-color: #f0f4f8; border-radius: 8px; margin-bottom: 15px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#evaluationModal1">
-                            <p style="font-size: 1rem; color: #333; margin: 0;"><strong>영어 작문 과제 1:</strong> 300자 이상의 영어 작문을 작성해 주세요.</p>
-                        </div>
-                        <div class="evaluation-box" style="padding: 10px; background-color: #f0f4f8; border-radius: 8px; margin-bottom: 15px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#evaluationModal2">
-                            <p style="font-size: 1rem; color: #333; margin: 0;"><strong>수학과제:</strong> 수학 보고서를 작성해 주세요.</p>
-                        </div>
-                        <!-- 필요하면 더 추가 -->
-                    </div>
-
-                    <div class="modal fade" id="evaluationModal1" tabindex="-1" role="dialog" aria-labelledby="evaluationModalLabel1" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="evaluationModalLabel1">영어 작문 과제 1 세부 사항</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <p><strong>내용:</strong> 주어진 주제에 따라 300자 이상의 영어 작문을 작성해 주세요.</p>
-                                    <p><strong>주제:</strong> "My Dream Vacation"</p>
-                                    <p><strong>지시 사항:</strong> 정확한 문법과 어휘 사용을 주의해 주세요.</p>
-                                    <hr>
-                                    <p><strong>제출 기한:</strong> 2024년 9월 15일 23:59까지</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 모달 구조 2 -->
-                    <div class="modal fade" id="evaluationModal2" tabindex="-1" role="dialog" aria-labelledby="evaluationModalLabel2" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="evaluationModalLabel2">수학과제 세부 사항</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <p><strong>내용:</strong> 300자 이상의 수학 보고서를 작성해주세요</p>
-                                    <p><strong>주제:</strong> "Fucking funny math"</p>
-                                    <p><strong>지시 사항:</strong> show yourself </p>
-                                    <hr>
-                                    <p><strong>제출 기한:</strong> 2024년 9월 20일 23:59까지</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                <div class="announcement-item">
+                    <h3>행정</h3>
+                    <p>발로 뛰며 필요한 정보 수집, 정보 정리 및 필요한 업무를 수행할 수 있는 사람</p>
+                </div>
+                <div class="announcement-item">
+                    <h3>개발</h3>
+                    <p>웹개발을 집중적으로 배우고 싶고 이에 열정이 있는 사람</p>
+                </div>
+                <div class="announcement-item">
+                    <h3>경영</h3>
+                    <p>조직 운영과 기록, 그리고 문제해결 능력이 뛰어난 사람</p>
+                </div>
+                <div class="announcement-item">
+                    <h3>마케팅 및 문의 처리</h3>
+                    <p>예산 분배와 문서 작성, 홍보 방안을 고안, 사람 응대 할 수 있는 사람</p>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
     <!-- End of Content Wrapper -->
 

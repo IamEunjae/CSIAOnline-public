@@ -8,5 +8,6 @@ urlpatterns = [
     path("", include("home.urls")),
     # Add other app paths as needed
     path("", include("yaja.urls")),
+    path("", include("announce.urls")),
+    path("", include("questions.urls")),
 ]
-

@@ -1,5 +1,4 @@
-
-<!DOCTYPE html>
+]<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,14 +8,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>CSIA ONLINE</title>
+    <title>CSIATech</title>
 
     <!-- Custom fonts for this template-->
     <link href="../../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
-        
+    
 
     <!-- Custom styles for this template-->
     <link href="../../static/css/sb-admin-2.min.css" rel="stylesheet">
@@ -50,7 +50,7 @@
         }
 
         .sidebar h2 {
-            font-size: 22px;
+            font-size: 23px;
             color: #ffffff;
             margin: 20px 0 20px 20px;
         }
@@ -68,7 +68,7 @@
         .sidebar ul li a {
             text-decoration: none;
             color: #d1d3e2;
-            font-size: 16px;
+            font-size: 20px;
             display: block;
             padding: 10px;
             border-radius: 5px;
@@ -135,7 +135,7 @@
         }
 
         h1 {
-            font-size: 28px;
+            font-size: 30px;
             color: #2e59d9;
         }
 
@@ -208,7 +208,7 @@
         }
 
         .form-control-lg {
-            font-size: 1rem;
+            font-size: 1.2rem;
             padding: 0.5rem 1rem;
             border-radius: 0.3rem;
             border: 1px solid #ced4da;
@@ -278,8 +278,69 @@
     @media (max-width: 849px) {
         .navbar-nav .nav-item {
             display: inline-flex; /* Ensure nav-items are displayed inline-flex on smaller screens */
+            font-size: 18px;
         }
     }
+
+    /* Base styles for card-container */
+    .card-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 20px;
+        width: 100%;
+        padding-top: 40px;
+    }
+
+    .card {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        display: flex;
+        flex-direction: column; /* Ensure content stacks vertically */
+        justify-content: space-between; /* Distribute content evenly */
+        height: 100%; /* Make sure the card takes full height of the grid cell */
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+
+    }
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        background-color: #e9f5ff;
+    }
+
+
+    /* Media query for larger screens */
+    @media (min-width: 851px) {
+        .card-container {
+            display: flex; /* Switch to flexbox layout */
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            height: auto;
+        }
+
+        .card {
+            max-width: calc(25% - 40px); /* Maintain original card sizing */
+            flex: 1 1 calc(25% - 40px);
+        }
+    }
+
+    /* Media query for smaller screens (2x2 grid) */
+    @media (max-width: 850px) {
+        .card-container {
+            display: grid; /* Switch to grid layout */
+            grid-template-columns: 1fr 1fr; /* 2 columns */
+            grid-gap: 20px; /* Space between cards */
+        }
+
+        .card {
+            max-width: 100%; /* Full width within grid cell */
+            height: auto;
+        }
+    }
+
         
     </style>
 
@@ -289,49 +350,50 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
+      <h2>    </h2>
         <h2>    </h2>
-        <h2>    </h2>
-        <h2>In School</h2>
-        <ul>
-            <li><a class="nav-link" href="/yaja">야자</a></li>
-            <li><a class="nav-link" href="/counsel">상담실(개발중)</a></li>
-            <li><a class="nav-link" value="/club">동아리(개발중)</a></li>
-        </ul>
-        <div class="footer">
-            <ul>
-                <li><a class="nav-link" href="/announce">공지</a></li>
-                <li><a class="nav-link" href="/question">문의</a></li>
-            </ul>
-        </div>
-    </div>
+
+      <h2>In School</h2>
+      <ul>
+          <li><a class="nav-link" value="yaja">야자</a></li>
+          <li><a class="nav-link" value="home">상담실(개발중)</a></li>
+          <li><a class="nav-link" value="home">동아리(개발중)</a></li>
+      </ul>
+      <div class="footer">
+          <ul>
+              <li><a class="nav-link" value="announce">공지</a></li>
+              <li><a class="nav-link" value="question">문의</a></li>
+          </ul>
+      </div>
+  </div>
     <!-- End of Sidebar -->
 
     <!-- Topbar -->
-    <nav class="navbar">
-        <a class="navbar-brand" href="#">CSIA ONLINE</a>
-        <!-- Topbar Navbar -->
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" value = "/home">
+  <nav class="navbar">
+      <a class="navbar-brand" href="#">CSIATech</a>
+      <!-- Topbar Navbar -->
+      <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+                <a class="nav-link" value = "home">
                     <i class="fas fa-home"></i>
                     <span>홈</span>
                 </a>
-                <a class="nav-link" value = "/home">
+                <a class="nav-link" value = "yaja">
                     <span>야자</span>
                 </a>
-                <a class="nav-link" value = "/counsel">
+                <a class="nav-link" value = "counsel">
                     <span>상담실(개발중)</span>
                 </a>
-                <a class="nav-link" value = "/club">
+                <a class="nav-link" value = "club">
                     <span>동아리(개발중)</span>
                 </a>
             </li>
-        </ul>
-    </nav>
-    <!-- End of Topbar -->
-
-    
-    
+      </ul>
+  </nav>
+  <!-- of Topbar -->
+    <div class="content-wrapper">
+        
+    </div>
     <!-- End of Content Wrapper -->
 
 
@@ -339,7 +401,7 @@
     <footer class="sticky-footer bg-white">
         <div class="container my-auto">
             <div class="copyright text-center my-auto">
-                <span>Copyright &copy; CSIA ONLINE 2024</span>
+                <span>Copyright &copy; CSIATech 2024</span>
             </div>
         </div>
     </footer>
@@ -350,9 +412,10 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../../static/js/sb-admin-2.min.js"></script>
-    <script src="../static/yaja.js"></script>
+    <script src="../static/home.js"></script>
     <script>
-
+        const apiURL = "https://csiatech.kr/";
+        
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function(event) {
                 event.preventDefault(); // Prevent default link behavior
@@ -361,6 +424,25 @@
                     window.location.href = apiURL + value;
                 }
             });
+        });
+
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function() {
+                const evalId = card.getAttribute('data-id');
+                const allModalContents = document.querySelectorAll('.modal-evaluation-content');
+                
+                allModalContents.forEach(content => content.style.display = 'none');
+                
+                const activeContent = document.getElementById(evalId);
+                if (activeContent) {
+                    activeContent.style.display = 'block';
+                }
+            });
+        });
+    
+        document.getElementById('evaluationModal').addEventListener('hidden.bs.modal', function () {
+            const allModalContents = document.querySelectorAll('.modal-evaluation-content');
+            allModalContents.forEach(content => content.style.display = 'none');
         });
 
     </script>
