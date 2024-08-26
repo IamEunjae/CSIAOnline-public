@@ -10,4 +10,5 @@ urlpatterns = [
     path("", include("yaja.urls")),
     path("", include("announce.urls")),
     path("", include("questions.urls")),
+    path("", include("club.urls")),
 ]
