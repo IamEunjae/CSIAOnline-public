@@ -1,7 +1,8 @@
 # views.py
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse, HttpResponseRedirect
 import json
 from django.core.exceptions import ObjectDoesNotExist
 from .reset import reset_schedules
@@ -37,15 +38,21 @@ def get_schedule_model_for_current_day(student_id):
             return Wednesday.objects.get(student_id=student_id)
         elif current_day == 3:
             return Thursday.objects.get(student_id=student_id)
-        elif (current_day == 4 or current_day == 5 or current_day == 0 or current_day == 6):  
+        elif (
+            current_day == 4 or current_day == 5 or current_day == 0 or current_day == 6
+        ):
             print("retrieved tody: monday schedule")
             return Monday.objects.get(student_id=student_id)
     except:
         return None
 
 
+@login_required
 @csrf_exempt
 def yaja_view(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect("/")
+
     current_student_id = request.user.student_id
     schedule = get_schedule_model_for_current_day(current_student_id)
     try:
@@ -355,23 +362,37 @@ def yaja_view(request):
             try:
                 monday_schedule = Monday.objects.get(student_id=current_student_id)
                 tuesday_schedule = Tuesday.objects.get(student_id=current_student_id)
-                wednesday_schedule = Wednesday.objects.get(student_id=current_student_id)
+                wednesday_schedule = Wednesday.objects.get(
+                    student_id=current_student_id
+                )
                 thursday_schedule = Thursday.objects.get(student_id=current_student_id)
                 print("All schedule retrieved")
 
                 # Check and assign "yaja" if any period is null
-                if not monday_schedule.period1: monday_schedule.period1 = "야자"
-                if not monday_schedule.period2: monday_schedule.period2 = "야자"
-                if not monday_schedule.period3: monday_schedule.period3 = "야자"
-                if not tuesday_schedule.period1: tuesday_schedule.period1 = "야자"
-                if not tuesday_schedule.period2: tuesday_schedule.period2 = "야자"
-                if not tuesday_schedule.period3: tuesday_schedule.period3 = "야자"
-                if not wednesday_schedule.period1: wednesday_schedule.period1 = "야자"
-                if not wednesday_schedule.period2: wednesday_schedule.period2 = "야자"
-                if not wednesday_schedule.period3: wednesday_schedule.period3 = "야자"
-                if not thursday_schedule.period1: thursday_schedule.period1 = "야자"
-                if not thursday_schedule.period2: thursday_schedule.period2 = "야자"
-                if not thursday_schedule.period3: thursday_schedule.period3 = "야자"
+                if not monday_schedule.period1:
+                    monday_schedule.period1 = "야자"
+                if not monday_schedule.period2:
+                    monday_schedule.period2 = "야자"
+                if not monday_schedule.period3:
+                    monday_schedule.period3 = "야자"
+                if not tuesday_schedule.period1:
+                    tuesday_schedule.period1 = "야자"
+                if not tuesday_schedule.period2:
+                    tuesday_schedule.period2 = "야자"
+                if not tuesday_schedule.period3:
+                    tuesday_schedule.period3 = "야자"
+                if not wednesday_schedule.period1:
+                    wednesday_schedule.period1 = "야자"
+                if not wednesday_schedule.period2:
+                    wednesday_schedule.period2 = "야자"
+                if not wednesday_schedule.period3:
+                    wednesday_schedule.period3 = "야자"
+                if not thursday_schedule.period1:
+                    thursday_schedule.period1 = "야자"
+                if not thursday_schedule.period2:
+                    thursday_schedule.period2 = "야자"
+                if not thursday_schedule.period3:
+                    thursday_schedule.period3 = "야자"
 
                 # Save the changes
                 monday_schedule.save()

@@ -301,7 +301,8 @@
     /* Show specific nav-items on smaller screens */
     @media (max-width: 849px) {
         .navbar-nav .nav-item {
-            display: inline-flex; /* Ensure nav-items are displayed inline-flex on smaller screens */
+            display: inline-flex; 
+            font-size: 18px;/* Ensure nav-items are displayed inline-flex on smaller screens */
         }
         .period-select{
             font-size: 10px;
@@ -312,7 +313,7 @@
         select {
         -webkit-appearance: none;
         -moz-appearance: none;
-        text-indent: 1px;
+        text-indent: 0px;
         text-overflow: '';
         }
 
@@ -346,7 +347,7 @@
 
     <!-- Topbar -->
         <nav class="navbar">
-        <a class="navbar-brand" href="#">CSIATech</a>
+        <a class="navbar-brand" value = "home" href="#">CSIATech</a>
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">

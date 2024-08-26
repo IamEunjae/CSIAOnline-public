@@ -1,7 +1,7 @@
 // Function to update the entire schedule
 // Function to get the selected value of a dropdown
 
-apiURL = "http://csiatech.kr/";
+apiURL = "https://csiatech.kr/";
 
 function getSelectedValue(dropdownId) {
   let dropdown = document.getElementById(dropdownId);

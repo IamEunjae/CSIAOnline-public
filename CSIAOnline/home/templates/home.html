@@ -278,6 +278,7 @@
     @media (max-width: 849px) {
         .navbar-nav .nav-item {
             display: inline-flex; /* Ensure nav-items are displayed inline-flex on smaller screens */
+            font-size: 18px;
         }
     }
 
@@ -300,6 +301,13 @@
         flex-direction: column; /* Ensure content stacks vertically */
         justify-content: space-between; /* Distribute content evenly */
         height: 100%; /* Make sure the card takes full height of the grid cell */
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+
+    }
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        background-color: #e9f5ff;
     }
 
 
@@ -529,7 +537,7 @@
     <script src="../../static/js/sb-admin-2.min.js"></script>
     <script src="../static/home.js"></script>
     <script>
-        const apiURL = "http://csiatech.kr/";
+        const apiURL = "https://csiatech.kr/";
         
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function(event) {

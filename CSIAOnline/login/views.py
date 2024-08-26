@@ -13,8 +13,6 @@ def custom_login(request):
         data = json.loads(request.body.decode("utf-8"))
         student_id = data.get("student_id")
         password = data.get("password")
-        print(student_id)
-        print(password)
 
         # Check if there is any matching object in the CustomUser table
         try:
