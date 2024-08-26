@@ -47,7 +47,6 @@ def get_schedule_model_for_current_day(student_id):
         return None
 
 
-@login_required
 @csrf_exempt
 def yaja_view(request):
     if not request.user.is_authenticated:
