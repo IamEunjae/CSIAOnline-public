@@ -356,8 +356,8 @@
       <h2>In School</h2>
       <ul>
           <li><a class="nav-link" value="yaja">야자</a></li>
-          <li><a class="nav-link" value="home">상담실(개발중)</a></li>
-          <li><a class="nav-link" value="home">동아리(개발중)</a></li>
+          <li><a class="nav-link" id = "working" value="home">상담실(개발중)</a></li>
+          <li><a class="nav-link" id = "working" value="home">동아리(개발중)</a></li>
       </ul>
       <div class="footer">
           <ul>
@@ -381,10 +381,10 @@
                 <a class="nav-link" value = "yaja">
                     <span>야자</span>
                 </a>
-                <a class="nav-link" value = "home">
+                <a class="nav-link" id = "working" value = "home">
                     <span>상담실(개발중)</span>
                 </a>
-                <a class="nav-link" value = "home">
+                <a class="nav-link" id = "working" value = "home">
                     <span>동아리(개발중)</span>
                 </a>
             </li>
@@ -566,6 +566,11 @@
         document.getElementById('evaluationModal').addEventListener('hidden.bs.modal', function () {
             const allModalContents = document.querySelectorAll('.modal-evaluation-content');
             allModalContents.forEach(content => content.style.display = 'none');
+        });
+
+        document.getElementById("working").addEventListener("click", function() {
+            let value = this.value;
+            alert(value + " coming soon");
         });
 
     </script>

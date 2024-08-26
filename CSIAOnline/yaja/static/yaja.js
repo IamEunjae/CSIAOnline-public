@@ -34,6 +34,11 @@ function getSelectedValues() {
   return values;
 }
 
+document.getElementById("working").addEventListener("click", function () {
+  let value = this.value;
+  alert(value + " coming soon");
+});
+
 function updateDefaultSchedule() {
   // Retrieve selected values from the
   let selectedValues = {};
