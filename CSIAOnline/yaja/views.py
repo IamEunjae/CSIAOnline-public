@@ -51,7 +51,7 @@ def get_schedule_model_for_current_day(student_id):
 @csrf_exempt
 def yaja_view(request):
     if not request.user.is_authenticated:
-        return HttpResponseRedirect("/")
+        return HttpResponseRedirect("https://csiatech.kr/")
 
     current_student_id = request.user.student_id
     schedule = get_schedule_model_for_current_day(current_student_id)
