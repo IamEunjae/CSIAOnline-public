@@ -578,7 +578,7 @@ function retrieveCurrentSchedule() {
         }
 
         const valueWednesday3 = data.wednesday.period3;
-        console.log(valueWednesday3)
+        console.log(valueWednesday3);
         if (
           ["외출/현체", "조퇴", "야자", "주문형강좌/방과후"].includes(
             valueWednesday3
@@ -593,7 +593,7 @@ function retrieveCurrentSchedule() {
         }
 
         const valueThursday3 = data.thursday.period3;
-        console.log(valueThursday3)
+        console.log(valueThursday3);
         if (
           ["외출/현체", "조퇴", "야자", "주문형강좌/방과후"].includes(
             valueThursday3
