@@ -433,7 +433,6 @@ function retrieveCurrentSchedule() {
           )
         ) {
           selectElementMonday1.value = valueMonday1;
-          inputElementMonday1.style.display = "none";
         } else {
           selectElementMonday1.value = "기타";
           inputElementMonday1.style.display = "block";
@@ -447,7 +446,6 @@ function retrieveCurrentSchedule() {
           )
         ) {
           selectElementTuesday1.value = valueTuesday1;
-          inputElementTuesday1.style.display = "none";
         } else {
           selectElementTuesday1.value = "기타";
           inputElementTuesday1.style.display = "block";
@@ -461,7 +459,6 @@ function retrieveCurrentSchedule() {
           )
         ) {
           selectElementWednesday1.value = valueWednesday1;
-          inputElementWednesday1.style.display = "none";
         } else {
           selectElementWednesday1.value = "기타";
           inputElementWednesday1.style.display = "block";
@@ -475,7 +472,6 @@ function retrieveCurrentSchedule() {
           )
         ) {
           selectElementThursday1.value = valueThursday1;
-          inputElementThursday1.style.display = "none";
         } else {
           selectElementThursday1.value = "기타";
           inputElementThursday1.style.display = "block";
@@ -489,7 +485,6 @@ function retrieveCurrentSchedule() {
           )
         ) {
           selectElementMonday2.value = valueMonday2;
-          inputElementMonday2.style.display = "none";
         } else {
           selectElementMonday2.value = "기타";
           inputElementMonday2.style.display = "block";
@@ -503,7 +498,6 @@ function retrieveCurrentSchedule() {
           )
         ) {
           selectElementTuesday2.value = valueTuesday2;
-          inputElementTuesday2.style.display = "none";
         } else {
           selectElementTuesday2.value = "기타";
           inputElementTuesday2.style.display = "block";
@@ -516,7 +510,6 @@ function retrieveCurrentSchedule() {
           )
         ) {
           selectElementWednesday2.value = valueWednesday2;
-          inputElementWednesday2.style.display = "none";
         } else {
           selectElementWednesday2.value = "기타";
           inputElementWednesday2.style.display = "block";
@@ -530,7 +523,6 @@ function retrieveCurrentSchedule() {
           )
         ) {
           selectElementThursday2.value = valueThursday2;
-          inputElementThursday2.style.display = "none";
         } else {
           selectElementThursday2.value = "기타";
           inputElementThursday2.style.display = "block";
@@ -544,7 +536,6 @@ function retrieveCurrentSchedule() {
           )
         ) {
           selectElementMonday3.value = valueMonday3;
-          inputElementMonday3.style.display = "none";
         } else {
           selectElementMonday3.value = "기타";
           inputElementMonday3.style.display = "block";
@@ -558,7 +549,6 @@ function retrieveCurrentSchedule() {
           )
         ) {
           selectElementTuesday3.value = valueTuesday3;
-          inputElementTuesday3.style.display = "none";
         } else {
           selectElementTuesday3.value = "기타";
           inputElementTuesday3.style.display = "block";
@@ -573,7 +563,6 @@ function retrieveCurrentSchedule() {
           )
         ) {
           selectElementWednesday3.value = valueWednesday3;
-          inputElementWednesday3.style.display = "none";
         } else {
           selectElementWednesday3.value = "기타";
           inputElementWednesday3.style.display = "block";
@@ -588,7 +577,6 @@ function retrieveCurrentSchedule() {
           )
         ) {
           selectElementThursday3.value = valueThursday3;
-          inputElementThursday3.style.display = "none";
         } else {
           selectElementThursday3.value = "기타";
           inputElementThursday3.style.display = "block";
