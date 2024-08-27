@@ -101,15 +101,12 @@ function retrieveDefaultSchedule() {
         const inputElementTuesday1 = document.getElementById(inputIdTuesday1);
 
         const selectIdWednesday1 = "default-period1-Wednesday";
-        const selectElementWednesday1 =
-          document.getElementById(selectIdWednesday1);
+        const selectElementWednesday1 = document.getElementById(selectIdWednesday1);
         const inputIdWednesday1 = `${selectIdWednesday1}-input`;
-        const inputElementWednesday1 =
-          document.getElementById(inputIdWednesday1);
+        const inputElementWednesday1 = document.getElementById(inputIdWednesday1);
 
         const selectIdThursday1 = "default-period1-Thursday";
-        const selectElementThursday1 =
-          document.getElementById(selectIdThursday1);
+        const selectElementThursday1 = document.getElementById(selectIdThursday1);
         const inputIdThursday1 = `${selectIdThursday1}-input`;
         const inputElementThursday1 = document.getElementById(inputIdThursday1);
 
@@ -124,15 +121,12 @@ function retrieveDefaultSchedule() {
         const inputElementTuesday2 = document.getElementById(inputIdTuesday2);
 
         const selectIdWednesday2 = "default-period2-Wednesday";
-        const selectElementWednesday2 =
-          document.getElementById(selectIdWednesday2);
+        const selectElementWednesday2 = document.getElementById(selectIdWednesday2);
         const inputIdWednesday2 = `${selectIdWednesday2}-input`;
-        const inputElementWednesday2 =
-          document.getElementById(inputIdWednesday2);
+        const inputElementWednesday2 = document.getElementById(inputIdWednesday2);
 
         const selectIdThursday2 = "default-period2-Thursday";
-        const selectElementThursday2 =
-          document.getElementById(selectIdThursday2);
+        const selectElementThursday2 = document.getElementById(selectIdThursday2);
         const inputIdThursday2 = `${selectIdThursday2}-input`;
         const inputElementThursday2 = document.getElementById(inputIdThursday2);
 
@@ -147,15 +141,12 @@ function retrieveDefaultSchedule() {
         const inputElementTuesday3 = document.getElementById(inputIdTuesday3);
 
         const selectIdWednesday3 = "default-period3-Wednesday";
-        const selectElementWednesday3 =
-          document.getElementById(selectIdWednesday3);
+        const selectElementWednesday3 = document.getElementById(selectIdWednesday3);
         const inputIdWednesday3 = `${selectIdWednesday3}-input`;
-        const inputElementWednesday3 =
-          document.getElementById(inputIdWednesday3);
+        const inputElementWednesday3 = document.getElementById(inputIdWednesday3);
 
         const selectIdThursday3 = "default-period3-Thursday";
-        const selectElementThursday3 =
-          document.getElementById(selectIdThursday3);
+        const selectElementThursday3 = document.getElementById(selectIdThursday3);
         const inputIdThursday3 = `${selectIdThursday3}-input`;
         const inputElementThursday3 = document.getElementById(inputIdThursday3);
 
