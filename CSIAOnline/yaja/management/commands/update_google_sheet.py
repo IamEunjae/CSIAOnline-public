@@ -3,7 +3,8 @@ import datetime
 from ...models import Monday, Tuesday, Wednesday, Thursday  # Update with your app name
 from django.core.management.base import BaseCommand
 
-GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxehpePFzkQbXFiBuXnW6ObAFOFf4yHd2Rpfe5dU_LQWLtvirJDlNXj19iKGkm4I1_kPg/exec'
+GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwxOD1A6UE9duo0b_Lntp5CkEh7z4raEMPUynpJ7K1WuaCdz-yVs69q8lmAj-xOGeDA/exec"
+
 
 def fetch_schedule():
     day_of_week = datetime.datetime.today().weekday()
@@ -19,20 +20,23 @@ def fetch_schedule():
         return None
     return schedules
 
+
 def update_google_sheet():
     schedules = fetch_schedule()
     if not schedules:
         print("No schedules to update for today.")
         return
-    
+
     updates = []
     for schedule in schedules:
-        updates.append({
-            'student_id': schedule.student_id,
-            'period1': schedule.period1,
-            'period2': schedule.period2,
-            'period3': schedule.period3,
-        })
+        updates.append(
+            {
+                "student_id": schedule.student_id,
+                "period1": schedule.period1,
+                "period2": schedule.period2,
+                "period3": schedule.period3,
+            }
+        )
     print(updates)
 
     response = requests.post(GOOGLE_APPS_SCRIPT_URL, json=updates)
@@ -40,6 +44,7 @@ def update_google_sheet():
         print("Google Sheet updated successfully.")
     else:
         print("Failed to update Google Sheet.", response.text)
+
 
 class Command(BaseCommand):
     help = "Resets user schedules to default values every Friday"
