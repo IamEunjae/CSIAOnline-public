@@ -10,9 +10,7 @@ class Command(BaseCommand):
     help = "Register users from a Google Spreadsheet"
 
     def handle(self, *args, **kwargs):
-        sheet_url = os.getenv(
-            "https://script.google.com/macros/s/AKfycbxTVvkT4ZIsIjhTIFlqcGiOwKGtF59MIVwlE6Qu2D-ikilXo2ZlxKoxMbLfIfLD-n3Qjw/exec"
-        )  # Fetch from environment variable
+        sheet_url = "https://script.google.com/macros/s/AKfycbxTVvkT4ZIsIjhTIFlqcGiOwKGtF59MIVwlE6Qu2D-ikilXo2ZlxKoxMbLfIfLD-n3Qjw/exec"  # Fetch from environment variable
         response = requests.get(sheet_url)
         if response.status_code != 200:
             self.stdout.write(
