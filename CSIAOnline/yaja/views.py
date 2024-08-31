@@ -47,6 +47,27 @@ def get_schedule_model_for_current_day(student_id):
         return None
 
 
+def ensure_schedule_exists(student_id):
+    models = [
+        (Monday, DefaultMonday),
+        (Tuesday, DefaultTuesday),
+        (Wednesday, DefaultWednesday),
+        (Thursday, DefaultThursday),
+    ]
+
+    for model, default_model in models:
+        try:
+            default_model.objects.get(student_id=student_id)
+            model.objects.get(student_id=student_id)
+        except ObjectDoesNotExist:
+            default_model.objects.get_or_create(
+                student_id=student_id, period1="야자", period2="야자", period3="야자"
+            )
+            model.objects.get_or_create(
+                student_id=student_id, period1="야자", period2="야자", period3="야자"
+            )
+
+
 @csrf_exempt
 def yaja_view(request):
     if not request.user.is_authenticated:
@@ -54,6 +75,7 @@ def yaja_view(request):
 
     current_student_id = request.user.student_id
     schedule = get_schedule_model_for_current_day(current_student_id)
+    ensure_schedule_exists(current_student_id)
     try:
         print(current_student_id)
 
