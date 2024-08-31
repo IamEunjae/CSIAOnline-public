@@ -27,7 +27,7 @@ class Command(BaseCommand):
                 if not CustomUser.objects.filter(student_id=student_id).exists():
                     CustomUser.objects.create_user(student_id=student_id)
                     cur = CustomUser.objects.get(student_id=student_id)
-                    cur.set_password(password)
+                    cur.password = password
                     cur.save()
                     self.stdout.write(
                         self.style.SUCCESS(
