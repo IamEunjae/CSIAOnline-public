@@ -21,7 +21,7 @@ class Command(BaseCommand):
         data = response.json()
         for entry in data:
             student_id = entry.get("student_id")
-            password = entry.get("password")
+            password = str(entry.get("password"))
 
             if student_id and password:
                 if not CustomUser.objects.filter(student_id=student_id).exists():
