@@ -70,7 +70,7 @@ CELERY_BEAT_SCHEDULE = {
     },
     "run-reset-every-day": {
         "task": "yaja.tasks.run_update_script",
-        "schedule": crontab(hour=19, minute=9, day_of_week="thu"),
+        "schedule": crontab(hour=12, minute=34, day_of_week="sun"),
     },
 }
 
