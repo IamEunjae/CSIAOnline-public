@@ -37,8 +37,15 @@ class Command(BaseCommand):
         for model, default_model in models:
             try:
                 model.objects.get(student_id=student_id)
+                default_model.objects.get(student_id=student_id)
             except ObjectDoesNotExist:
                 default_model.objects.get_or_create(
+                    student_id=student_id,
+                    period1="야자",
+                    period2="야자",
+                    period3="야자",
+                )
+                model.objects.get_or_create(
                     student_id=student_id,
                     period1="야자",
                     period2="야자",
