@@ -371,8 +371,6 @@
 
     
     <div class="content-wrapper">
-        
-        <h1 class="text-center mb-4">야자 일정표</h1>
         <div class="blue-box">
             매일 5시 30분 이후 야자 일정 변경은 반영되지 않습니다
         </div>
@@ -413,7 +411,7 @@
             </div>
             <div class="table-container">
                 <form id="weekForm" action="/" method="put">
-                    <h2 class="text-center">야자 일정표</h2>
+                    <h2 class="text-center">이번주 야자</h2>
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -557,7 +555,7 @@
                         </tbody>
                     </table>
                     <div class="form-buttons">
-                        <button type="button" class="btn btn-primary" id="modalpop" data-bs-toggle="modal" data-bs-target="#defaultsetmodal" method="get" role="dialog">자동기입</button>
+                        <button type="button" class="btn btn-primary" id="modalpop" data-bs-toggle="modal" data-bs-target="#defaultsetmodal" method="get" role="dialog">일괄신청</button>
                         <input type="submit" class="btn btn-submit" value="Submit" name="submit">
                     </div>
                 </form>
@@ -571,7 +569,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="defaultsetmodalarea">야자 기본값 적용</h5>
+                    <h5 class="modal-title" id="defaultsetmodalarea">야자 일괄 신청</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
