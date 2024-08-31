@@ -21,16 +21,17 @@ class Command(BaseCommand):
         data = response.json()
         for entry in data:
             student_id = entry.get("student_id")
-            password = str(entry.get("password"))
+            password = entry.get("password")
 
             if student_id and password:
                 if not CustomUser.objects.filter(student_id=student_id).exists():
-                    CustomUser.objects.create_user(
-                        student_id=student_id, password=password
-                    )
+                    CustomUser.objects.create_user(student_id=student_id)
+                    cur = CustomUser.objects.get(student_id=student_id)
+                    cur.set_password(password)
+                    cur.save()
                     self.stdout.write(
                         self.style.SUCCESS(
-                            f"Successfully created user with student_id: {student_id}"
+                            f"Successfully created user with student_id: {student_id}, {password}"
                         )
                     )
                 else:
