@@ -68,7 +68,19 @@ CELERY_BEAT_SCHEDULE = {
         "task": "yaja.tasks.run_reset_script",
         "schedule": crontab(hour=13, minute=59, day_of_week="sat"),
     },
-    "run-reset-every-day": {
+    "run-reset-every-day-9am": {
+        "task": "yaja.tasks.run_update_script",
+        "schedule": crontab(hour=9, minute=00, day_of_week="mon"),
+    },
+    "run-reset-every-day-1pm": {
+        "task": "yaja.tasks.run_update_script",
+        "schedule": crontab(hour=13, minute=00, day_of_week="mon"),
+    },
+    "run-reset-every-day-5pm": {
+        "task": "yaja.tasks.run_update_script",
+        "schedule": crontab(hour=17, minute=00, day_of_week="mon"),
+    },
+    "run-reset-every-day-5pm-29min": {
         "task": "yaja.tasks.run_update_script",
         "schedule": crontab(hour=17, minute=29, day_of_week="mon"),
     },
