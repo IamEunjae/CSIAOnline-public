@@ -178,6 +178,7 @@ submitButton.addEventListener("click", async () => {
 });
 cancelButton.addEventListener("click", async () => {
   deleteReservation();
+  window.reload();
 });
 
 document.addEventListener("DOMContentLoaded", () => {
