@@ -11,4 +11,5 @@ urlpatterns = [
     path("", include("announce.urls")),
     path("", include("questions.urls")),
     path("", include("club.urls")),
+    path("", include("seminar.urls")),
 ]

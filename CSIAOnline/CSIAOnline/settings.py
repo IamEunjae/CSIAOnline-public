@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     "announce",
     "questions",
     "club",
+    "seminar",
+
 ]
 
 CELERY_BROKER_URL = "redis://localhost:6379"

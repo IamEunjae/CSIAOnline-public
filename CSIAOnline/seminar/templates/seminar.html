@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CSIATech</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="../../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+        
+    <!-- Custom styles for this template-->
+    <link href="../../static/css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        /* Base styles */
+        body {
+            font-family: "IBM Plex Sans KR", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            background-color: #f8f9fc;
+            color: #5a5c69;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .sidebar {
+            width: 220px;
+            background-color: #2e59d9;
+            padding: 20px 0;
+            position: fixed;
+            height: 100%;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            overflow-x: auto;
+            overflow-y: auto;
+            z-index: 2;
+        }
+
+        .sidebar h2 {
+            font-size: 23px;
+            color: #ffffff;
+            margin: 20px 0 20px 20px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0 20px;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 15px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #d1d3e2;
+            font-size: 20px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #4e73df;
+            color: #ffffff;
+        }
+
+        .navbar {
+            width: calc(100% - 220px); /* Adjusted for sidebar width */
+            background-color: #2e59d9;
+            color: #ffffff;
+            padding: 15px;
+            position: fixed;
+            top: 0;
+            left: 220px; /* Adjusted for sidebar position */
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .navbar-brand {
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .content-wrapper {
+            margin-top: 70px;
+            margin-left: 220px;
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 30%; /* 3:7 비율 */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .status-container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 70%; /* 3:7 비율 */
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 10px; /* 체크박스 사이 간격 조절 */
+            align-items: center; /* 체크박스와 텍스트 수평 맞춤 */
+        }
+
+        label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #1a1a1a;
+        }
+
+        input[type="text"], select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .student-names {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            grid-template-rows: repeat(6, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            background-color: #4e73df;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #2e59d9;
+        }
+
+        .room-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .room {
+            border: 2px solid #4e73df;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        .room-title {
+            font-size: 16px;
+            color: #2e59d9;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .time-slot {
+            font-size: 14px;
+            padding: 8px;
+            border-top: 1px solid #ddd;
+            color: #1a1a1a;
+        }
+
+        .available {
+            background-color: #e0e0e0;
+        }
+
+        .reserved {
+            background-color: #d1e7ff;
+            color: #2e59d9;
+        }
+
+/* Media queries */
+    @media (max-width: 850px) {
+        .sidebar {
+            width: 100%;
+            height: auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            flex-direction: row;
+            justify-content: space-around;
+            padding: 10px 0;
+            background-color: #2e59d9;
+            z-index: 3;
+        }
+
+        .sidebar ul {
+            display: flex;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 0 10px;
+        }
+
+        .navbar {
+            width: 100%;
+            left: 0;
+            top: 60px; /* Adjusted to appear below the sidebar */
+            z-index: 2;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .content-wrapper {
+            margin: 120px auto 0 auto; /* Adjust margin to appear below navbar */
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #ffffff1a;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .status-container,
+        .form-container {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .room-grid {
+            grid-template-columns: repeat(2, 1fr); /* 2열로 표시 */
+            gap: 10px;
+        }
+    }
+
+        @media (max-width: 600px) {
+            .room-grid {
+                grid-template-columns: 1fr; /* 1열로 표시 */
+            }
+        }
+    </style>
+</head>
+
+
+<body id="page-top">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>In School</h2>
+        <ul>
+            <li><a class="nav-link" value="yaja">야자</a></li>
+            <li><a class="nav-link" value="seminar">세미나실</a></li>
+            <li><a class="nav-link" id="working" value="club">동아리(개발중)</a></li>
+        </ul>
+        <div class="footer">
+            <ul>
+                <li><a class="nav-link" value="announce">공지</a></li>
+                <li><a class="nav-link" value="questions">문의</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- End of Sidebar -->
+
+    <!-- Topbar -->
+    <nav class="navbar">
+        <a class="navbar-brand nav-link" value="home" href="#">CSIATech</a>
+    </nav>
+    <!-- End of Topbar -->
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper">
+        <!-- Form Section -->
+        <div class="form-container">
+            <h2>세미나실 신청</h2>
+            <div class="form-group">
+                <label for="student-name">학생 이름</label>
+                <div class="student-names">
+                    <input id = "student1" type="text" name="student1" placeholder="대표자 학번 이름 입력" required>
+                    <input type="text" name="student2" placeholder="학번 이름 입력">
+                    <input type="text" name="student3" placeholder="학번 이름 입력">
+                    <input type="text" name="student4" placeholder="학번 이름 입력">
+                    <input type="text" name="student5" placeholder="학번 이름 입력">
+                    <input type="text" name="student6" placeholder="학번 이름 입력">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="room-number">세미나실 선택</label>
+                <select name="room" id="room">
+                    <option value="1">세미나실 1</option>
+                    <option value="2">세미나실 2</option>
+                    <option value="3">세미나실 3</option>
+                    <option value="4">세미나실 4</option>
+                    <option value="5">세미나실 5</option>
+                    <option value="6">세미나실 6</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>야자 시간 선택</label>
+                <div class="checkbox-group">
+                    <input type="checkbox" name="period1" id="period1"> 1교시
+                    <input type="checkbox" name="period2" id="period2"> 2교시
+                    <input type="checkbox" name="period3" id="period3"> 3교시
+                </div>
+            </div>
+
+            <button type="button" id="submit-btn">신청</button>
+        </div>
+
+        <!-- Status Section -->
+        <div class="status-container">
+            <h2>세미나실 현황</h2>
+            <div class="room-grid">
+                <div class="room">
+                    <div class="room-title">세미나실 1</div>
+                    <div id="room-1-1" class="period" data-period="1">1교시</div>
+                    <div id="room-1-2" class="period" data-period="2">2교시</div>
+                    <div id="room-1-3" class="period" data-period="3">3교시</div>
+                </div>
+                <div class="room">
+                    <div class="room-title">세미나실 2</div>
+                    <div id="room-2-1" class="period" data-period="1">1교시</div>
+                    <div id="room-2-2" class="period" data-period="2">2교시</div>
+                    <div id="room-2-3" class="period" data-period="3">3교시</div>
+                </div>
+                <div class="room">
+                    <div class="room-title">세미나실 3</div>
+                    <div id="room-3-1" class="period" data-period="1">1교시</div>
+                    <div id="room-3-2" class="period" data-period="2">2교시</div>
+                    <div id="room-3-3" class="period" data-period="3">3교시</div>
+                </div>
+                <div class="room">
+                    <div class="room-title">세미나실 4</div>
+                    <div id="room-4-1" class="period" data-period="1">1교시</div>
+                    <div id="room-4-2" class="period" data-period="2">2교시</div>
+                    <div id="room-4-3" class="period" data-period="3">3교시</div>
+                </div>
+                <div class="room">
+                    <div class="room-title">세미나실 5</div>
+                    <div id="room-5-1" class="period" data-period="1">1교시</div>
+                    <div id="room-5-2" class="period" data-period="2">2교시</div>
+                    <div id="room-5-3" class="period" data-period="3">3교시</div>
+                </div>
+                <div class="room">
+                    <div class="room-title">세미나실 6</div>
+                    <div id="room-6-1" class="period" data-period="1">1교시</div>
+                    <div id="room-6-2" class="period" data-period="2">2교시</div>
+                    <div id="room-6-3" class="period" data-period="3">3교시</div>
+                </div>
+            </div>
+        </div> 
+    </div>
+    <!-- End of Content Wrapper -->
+    
+    <script src="../static/seminar.js"></script>
+
+</body>
+
+</html>
