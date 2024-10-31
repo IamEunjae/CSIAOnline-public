@@ -16,7 +16,7 @@ const studentInputs = [
   document.getElementsByName("student6")[0],
 ];
 
-const apiURL = "http://127.0.0.1:8000/seminar/";
+const apiURL = "https://csiatech.kr/seminar/";
 
 const retrieveCurrentReservation = () => {
   fetch(apiURL, {
