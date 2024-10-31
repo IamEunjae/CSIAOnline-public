@@ -5,7 +5,7 @@ from .models import Reservation, Room
 import json
 from django.db.models import Q
 
-
+ 
 def update_room_status():
 
     # Fetch all Room objects and reset all periods to False
