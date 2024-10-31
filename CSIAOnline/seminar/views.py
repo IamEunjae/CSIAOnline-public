@@ -72,7 +72,7 @@ def seminar_room_view(request):
 
     if request.method == "GET" and request.headers.get("type") == "retrieve":
         print("GET recieved")
-        current_student_id = request.user.id
+        current_student_id = request.user.student_id
         print(current_student_id)
 
         # Retrieve the reservation details for the logged-in student
