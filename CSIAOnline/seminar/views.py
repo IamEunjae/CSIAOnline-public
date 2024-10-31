@@ -7,6 +7,7 @@ from django.db.models import Q
 
 
 def update_room_status():
+
     # Fetch all Room objects and reset all periods to False
     rooms = Room.objects.all()
     for room in rooms:
@@ -35,7 +36,10 @@ def update_room_status():
 
 @csrf_exempt
 def seminar_room_view(request):
-
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect("https://csiatech.kr/")
+    # Your logic to aggregate data or render templates goes here
+    print(request.user.student_id)
     current_student_id = request.user.id
 
     if request.method == "DELETE":
@@ -161,4 +165,4 @@ def seminar_room_view(request):
     # Retrieve the reservation details for the logged-in student
 
 
-    return render(request, "seminar.html",)
+    return render(request, "seminar.html")
