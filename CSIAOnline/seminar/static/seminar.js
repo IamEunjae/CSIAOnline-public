@@ -102,9 +102,9 @@ function updateCheckboxesForRoom(roomNumber, roomStatus) {
   checkboxes.period3.disabled = roomPeriods.period3;
 
   // Apply styles based on availability
-  checkboxes.period1.style.opacity = roomPeriods.period1 ? "1" : "0.9";
-  checkboxes.period2.style.opacity = roomPeriods.period2 ? "1" : "0.9";
-  checkboxes.period3.style.opacity = roomPeriods.period3 ? "1" : "0.9";
+  checkboxes.period1.style.opacity = roomPeriods.period1 ? "1" : "0.4";
+  checkboxes.period2.style.opacity = roomPeriods.period2 ? "1" : "0.4";
+  checkboxes.period3.style.opacity = roomPeriods.period3 ? "1" : "0.4";
 }
 
 function gatherFormData() {
