@@ -1,6 +1,5 @@
 const form = document.getElementById("reservation-form");
 const submitButton = document.getElementById("submit-btn");
-const cancelButton = document.getElementById("cancel");
 const roomSelect = document.getElementById("room");
 const checkboxes = {
   period1: document.getElementById("period1"),
@@ -75,6 +74,16 @@ const retrieveCurrentReservation = () => {
     });
 };
 
+
+function resetForm() {
+  roomSelect.value = "1"; // Set Room 1 as default
+  studentInputs.forEach((input) => (input.value = "")); // Clear student fields
+  checkboxes.period1.checked = false;
+  checkboxes.period2.checked = false;
+  checkboxes.period3.checked = false;
+  submitButton.textContent = "Reserve";
+  submitButton.classList.remove("delete");
+}
 
 function updateCheckboxesForRoom(roomNumber, roomStatus) {
   const roomPeriods = roomStatus[roomNumber];
@@ -162,10 +171,12 @@ const deleteReservation = async () => {
 
 
 submitButton.addEventListener("click", async () => {
-  makeReservation();
-});
-cancelButton.addEventListener("click", async () => {
-  deleteReservation();
+  let data;
+  if (submitButton.classList.contains("delete")) {
+    deleteReservation();
+  } else {
+    makeReservation();
+  }
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -176,5 +187,3 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCheckboxesForRoom(event.target.value, roomStatus.room_status);
   });
 });
-
-
