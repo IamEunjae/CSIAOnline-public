@@ -178,9 +178,13 @@ const deleteReservation = async () => {
 };
 
 submitButton.addEventListener("click", async () => {
-  makeReservation();
-  alert("Successfully reserved");
-  location.reload();
+  if (studentInputs[0].value) {  // Check if the first student input is not empty
+    await makeReservation();      // Ensure makeReservation is awaited
+    alert("Successfully reserved");
+    location.reload();
+  } else {
+    alert("Please fill in the form.");
+  }
 });
 cancelButton.addEventListener("click", async () => {
   deleteReservation();
