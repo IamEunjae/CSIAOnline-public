@@ -170,6 +170,7 @@ const deleteReservation = async () => {
       if (!response.ok) {
         throw new Error("Failed to delete reservation");
       }
+      alert("Successfully canceled");
       return response.json();
     })
     .catch((error) => {
