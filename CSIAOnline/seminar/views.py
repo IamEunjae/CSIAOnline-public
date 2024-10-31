@@ -116,11 +116,13 @@ def seminar_room_view(request):
                 "period2": student_reservation.period2,
                 "period3": student_reservation.period3,
                 "room_status": room_status,  # Include room status in the response
+                "current_student_id":current_student_id,
             }
         else:
             data = {
                 "status": "notreserved",
                 "room_status": room_status,
+                "current_student_id":current_student_id,
             }  # No reservation found, but include room status
 
         return JsonResponse(data)

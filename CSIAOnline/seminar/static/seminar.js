@@ -1,5 +1,6 @@
 const form = document.getElementById("reservation-form");
-const submitButton = document.getElementById("submit-btn");
+const submitButton = document.getElementById("reserve");
+const cancelButton = document.getElementById("cancel");
 const roomSelect = document.getElementById("room");
 const checkboxes = {
   period1: document.getElementById("period1"),
@@ -35,6 +36,7 @@ const retrieveCurrentReservation = () => {
       console.log(data);
 
       if (data.status === "reserved") {
+        console.log(data.current_student_id)
         // Populate form with reservation data
         roomSelect.value = data.room_number;
         studentInputs[0].value = data.student1;
@@ -57,13 +59,13 @@ const retrieveCurrentReservation = () => {
           }
         }
           else {
-
-        const roomStatus = data.room_status;
-        Object.keys(roomStatus).forEach((roomNumber) => {
-          const roomPeriods = roomStatus[roomNumber];
-          for (let period = 1; period <= 3; period++) {
-            const periodElement = document.getElementById(`room-${roomNumber}-${period}`);
-            periodElement.style.backgroundColor = roomPeriods[`period${period}`] ? "lightcoral" : "lightgreen";
+            console.log(data.current_student_id)
+            const roomStatus = data.room_status;
+            Object.keys(roomStatus).forEach((roomNumber) => {
+            const roomPeriods = roomStatus[roomNumber];
+            for (let period = 1; period <= 3; period++) {
+                const periodElement = document.getElementById(`room-${roomNumber}-${period}`);
+                periodElement.style.backgroundColor = roomPeriods[`period${period}`] ? "lightcoral" : "lightgreen";
           }
         });
       }
@@ -171,19 +173,17 @@ const deleteReservation = async () => {
 
 
 submitButton.addEventListener("click", async () => {
-  let data;
-  if (submitButton.classList.contains("delete")) {
-    deleteReservation();
-  } else {
     makeReservation();
-  }
-});
+  });
+  cancelButton.addEventListener("click", async () => {
+    deleteReservation();
+    window.reload();
+  });
 
 document.addEventListener("DOMContentLoaded", () => {
   retrieveCurrentReservation();
 
   roomSelect.addEventListener("change", async (event) => {
-    const roomStatus = await retrieveCurrentReservation();
-    updateCheckboxesForRoom(event.target.value, roomStatus.room_status);
+    retrieveCurrentReservation();
   });
 });
