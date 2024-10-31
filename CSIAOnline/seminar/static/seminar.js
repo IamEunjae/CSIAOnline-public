@@ -1,5 +1,5 @@
 const form = document.getElementById("reservation-form");
-const submitButton = document.getElementById("reserve");
+const submitButton = document.getElementById("submit-btn");
 const cancelButton = document.getElementById("cancel");
 const roomSelect = document.getElementById("room");
 const checkboxes = {
@@ -15,6 +15,7 @@ const studentInputs = [
   document.getElementsByName("student5")[0],
   document.getElementsByName("student6")[0],
 ];
+
 const apiURL = "https://csiatech.kr/seminar/";
 
 const retrieveCurrentReservation = () => {
@@ -35,7 +36,6 @@ const retrieveCurrentReservation = () => {
       console.log(data);
 
       if (data.status === "reserved") {
-        console.log(data.current_student_id)
         // Populate form with reservation data
         roomSelect.value = data.room_number;
         studentInputs[0].value = data.student1;
@@ -47,31 +47,26 @@ const retrieveCurrentReservation = () => {
         checkboxes.period1.checked = data.period1;
         checkboxes.period2.checked = data.period2;
         checkboxes.period3.checked = data.period3;
-        console.log(data.current_student_id)
-            const roomStatus = data.room_status;
-            Object.keys(roomStatus).forEach((roomNumber) => {
-            const roomPeriods = roomStatus[roomNumber];
-            for (let period = 1; period <= 3; period++) {
-                const periodElement = document.getElementById(`room-${roomNumber}-${period}`);
-                periodElement.style.backgroundColor = roomPeriods[`period${period}`] ? "lightcoral" : "lightgreen";
+        submitButton.textContent = "취소";
+        submitButton.classList.add("delete");
+
+        const roomNumber = data.room_number;
+        const roomPeriods = data.room_status[roomNumber]
+          for (let period = 1; period <= 3; period++) {
+            const periodElement = document.getElementById(`room-${roomNumber}-${period}`);
+            periodElement.style.backgroundColor = roomPeriods[`period${period}`] ? "lightcoral" : "lightgreen";
           }
-        });
-        cancelButton.style.display = "block";
-        submitButton.style.display = "none";
-        
         }
           else {
-            console.log(data.current_student_id)
-            const roomStatus = data.room_status;
-            Object.keys(roomStatus).forEach((roomNumber) => {
-            const roomPeriods = roomStatus[roomNumber];
-            for (let period = 1; period <= 3; period++) {
-                const periodElement = document.getElementById(`room-${roomNumber}-${period}`);
-                periodElement.style.backgroundColor = roomPeriods[`period${period}`] ? "lightcoral" : "lightgreen";
+
+        const roomStatus = data.room_status;
+        Object.keys(roomStatus).forEach((roomNumber) => {
+          const roomPeriods = roomStatus[roomNumber];
+          for (let period = 1; period <= 3; period++) {
+            const periodElement = document.getElementById(`room-${roomNumber}-${period}`);
+            periodElement.style.backgroundColor = roomPeriods[`period${period}`] ? "lightcoral" : "lightgreen";
           }
         });
-        cancelButton.style.display = "none";
-        submitButton.style.display = "block";
       }
       updateCheckboxesForRoom(roomSelect.value, data.room_status);
     })
@@ -167,16 +162,19 @@ const deleteReservation = async () => {
 
 
 submitButton.addEventListener("click", async () => {
-    makeReservation();
-  });
-  cancelButton.addEventListener("click", async () => {
-    deleteReservation();
-  });
+  makeReservation();
+});
+cancelButton.addEventListener("click", async () => {
+  deleteReservation();
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   retrieveCurrentReservation();
 
   roomSelect.addEventListener("change", async (event) => {
-    retrieveCurrentReservation();
+    const roomStatus = await retrieveCurrentReservation();
+    updateCheckboxesForRoom(event.target.value, roomStatus.room_status);
   });
 });
+
+
