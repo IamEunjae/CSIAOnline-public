@@ -159,26 +159,6 @@ def seminar_room_view(request):
         return JsonResponse({"status": "reserved"})
 
     # Retrieve the reservation details for the logged-in student
-    student_reservation = Reservation.objects.filter(
-        student1=current_student_id
-    ).first()
 
-    rooms = Room.objects.all()  # Get all rooms
 
-    room_status = {
-        room.room_number: {
-            "period1": room.period1,
-            "period2": room.period2,
-            "period3": room.period3,
-        }
-        for room in rooms
-    }
-    print(room_status)
-
-    context = {
-        "current_student_id": current_student_id,
-        "student_reservation": student_reservation,
-        "room_status": room_status,
-    }
-
-    return render(request, "seminar.html", context)
+    return render(request, "seminar.html",)
