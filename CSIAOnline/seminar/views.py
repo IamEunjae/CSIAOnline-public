@@ -35,8 +35,10 @@ def update_room_status():
 
 @csrf_exempt
 def seminar_room_view(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect("https://csiatech.kr/")
 
-    current_student_id = request.user.id
+    current_student_id = request.user.student_id
 
     if request.method == "DELETE":
         reservation_data = json.loads(request.body)  # Load JSON data
@@ -68,7 +70,7 @@ def seminar_room_view(request):
 
     if request.method == "GET" and request.headers.get("type") == "retrieve":
         print("GET recieved")
-        current_student_id = request.user.id
+        current_student_id = request.user.student_id
         print(current_student_id)
 
         # Retrieve the reservation details for the logged-in student
@@ -159,26 +161,8 @@ def seminar_room_view(request):
         return JsonResponse({"status": "reserved"})
 
     # Retrieve the reservation details for the logged-in student
-    student_reservation = Reservation.objects.filter(
-        student1=current_student_id
-    ).first()
 
-    rooms = Room.objects.all()  # Get all rooms
 
-    room_status = {
-        room.room_number: {
-            "period1": room.period1,
-            "period2": room.period2,
-            "period3": room.period3,
-        }
-        for room in rooms
-    }
-    print(room_status)
 
-    context = {
-        "current_student_id": current_student_id,
-        "student_reservation": student_reservation,
-        "room_status": room_status,
-    }
 
-    return render(request, "seminar.html", context)
+    return render(request, "seminar.html")
