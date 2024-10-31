@@ -180,11 +180,11 @@ const deleteReservation = async () => {
 
 submitButton.addEventListener("click", async () => {
   makeReservation();
-  window.reload();
+  location.reload();
 });
 cancelButton.addEventListener("click", async () => {
   deleteReservation();
-  window.reload();
+  location.reload();
 });
 
 document.addEventListener("DOMContentLoaded", () => {
