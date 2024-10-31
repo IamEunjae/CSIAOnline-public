@@ -315,43 +315,45 @@
     <div class="content-wrapper">
         <!-- Form Section -->
         <div class="form-container">
-            <h2>세미나실 신청</h2>
-            <div class="form-group">
-                <label for="student-name">학생 이름</label>
-                <div class="student-names">
-                    <input id = "student1" type="text" name="student1" placeholder="대표자 학번 이름 입력" required>
-                    <input type="text" name="student2" placeholder="학번 이름 입력">
-                    <input type="text" name="student3" placeholder="학번 이름 입력">
-                    <input type="text" name="student4" placeholder="학번 이름 입력">
-                    <input type="text" name="student5" placeholder="학번 이름 입력">
-                    <input type="text" name="student6" placeholder="학번 이름 입력">
+            <form id="reservation-form">
+                <h2>세미나실 신청</h2>
+                <div class="form-group">
+                    <label for="student-name">학생 이름</label>
+                    <div class="student-names">
+                        <input id = "student1" type="text" name="student1" placeholder="대표자 학번 이름 입력" required>
+                        <input type="text" name="student2" placeholder="학번 이름 입력">
+                        <input type="text" name="student3" placeholder="학번 이름 입력">
+                        <input type="text" name="student4" placeholder="학번 이름 입력">
+                        <input type="text" name="student5" placeholder="학번 이름 입력">
+                        <input type="text" name="student6" placeholder="학번 이름 입력">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="room-number">세미나실 선택</label>
-                <select name="room" id="room">
-                    <option value="1">세미나실 1</option>
-                    <option value="2">세미나실 2</option>
-                    <option value="3">세미나실 3</option>
-                    <option value="4">세미나실 4</option>
-                    <option value="5">세미나실 5</option>
-                    <option value="6">세미나실 6</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>야자 시간 선택</label>
-                <div class="checkbox-group">
-                    <input type="checkbox" name="period1" id="period1"> 1교시
-                    <input type="checkbox" name="period2" id="period2"> 2교시
-                    <input type="checkbox" name="period3" id="period3"> 3교시
+                <div class="form-group">
+                    <label for="room-number">세미나실 선택</label>
+                    <select name="room" id="room">
+                        <option value="1">세미나실 1</option>
+                        <option value="2">세미나실 2</option>
+                        <option value="3">세미나실 3</option>
+                        <option value="4">세미나실 4</option>
+                        <option value="5">세미나실 5</option>
+                        <option value="6">세미나실 6</option>
+                    </select>
                 </div>
-            </div>
 
-            <button type="button" id="reserve">신청</button>
-            <button type="button" id="cancel">취소</button>
-        </div>
+                <div class="form-group">
+                    <label>야자 시간 선택</label>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="period1" id="period1"> 1교시
+                        <input type="checkbox" name="period2" id="period2"> 2교시
+                        <input type="checkbox" name="period3" id="period3"> 3교시
+                    </div>
+                </div>
 
+                <button type="button" id="reserve">신청</button>
+                <button type="button" id="cancel">취소</button>
+
+                </div>
+            </form>
         <!-- Status Section -->
         <div class="status-container">
             <h2>세미나실 현황</h2>

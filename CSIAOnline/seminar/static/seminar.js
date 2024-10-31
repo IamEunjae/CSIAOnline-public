@@ -146,8 +146,7 @@ const makeReservation = async () => {
       console.log(data);
       console.log("got response");
       if (data.status === "reserved") {
-        alert("Successfully reserved");
-        location.reload();
+
       } else {
         console.error("Error", data);
       }
@@ -170,7 +169,6 @@ const deleteReservation = async () => {
       if (!response.ok) {
         throw new Error("Failed to delete reservation");
       }
-      alert("Successfully canceled");
       return response.json();
     })
     .catch((error) => {
@@ -181,10 +179,12 @@ const deleteReservation = async () => {
 
 submitButton.addEventListener("click", async () => {
   makeReservation();
+  alert("Successfully reserved");
   location.reload();
 });
 cancelButton.addEventListener("click", async () => {
   deleteReservation();
+  alert("Successfully canceled");
   location.reload();
 });
 
