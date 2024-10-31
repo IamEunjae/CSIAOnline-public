@@ -47,13 +47,18 @@ const retrieveCurrentReservation = () => {
         checkboxes.period1.checked = data.period1;
         checkboxes.period2.checked = data.period2;
         checkboxes.period3.checked = data.period3;
-
-        const roomNumber = data.room_number;
-        const roomPeriods = data.room_status[roomNumber]
-          for (let period = 1; period <= 3; period++) {
-            const periodElement = document.getElementById(`room-${roomNumber}-${period}`);
-            periodElement.style.backgroundColor = roomPeriods[`period${period}`] ? "lightcoral" : "lightgreen";
+        console.log(data.current_student_id)
+            const roomStatus = data.room_status;
+            Object.keys(roomStatus).forEach((roomNumber) => {
+            const roomPeriods = roomStatus[roomNumber];
+            for (let period = 1; period <= 3; period++) {
+                const periodElement = document.getElementById(`room-${roomNumber}-${period}`);
+                periodElement.style.backgroundColor = roomPeriods[`period${period}`] ? "lightcoral" : "lightgreen";
           }
+        });
+        cancelButton.style.display = "block";
+        submitButton.style.display = "none";
+        
         }
           else {
             console.log(data.current_student_id)
@@ -65,6 +70,8 @@ const retrieveCurrentReservation = () => {
                 periodElement.style.backgroundColor = roomPeriods[`period${period}`] ? "lightcoral" : "lightgreen";
           }
         });
+        cancelButton.style.display = "none";
+        submitButton.style.display = "block";
       }
       updateCheckboxesForRoom(roomSelect.value, data.room_status);
     })
