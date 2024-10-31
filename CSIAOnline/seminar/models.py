@@ -20,3 +20,4 @@ class Room(models.Model):
     period1 = models.BooleanField(default=False)
     period2 = models.BooleanField(default=False)
     period3 = models.BooleanField(default=False)
+  
