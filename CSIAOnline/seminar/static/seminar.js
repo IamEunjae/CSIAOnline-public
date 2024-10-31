@@ -50,6 +50,10 @@ const retrieveCurrentReservation = () => {
         cancelButton.style.display = "block";
         submitButton.style.display = "none";
 
+        studentInputs.forEach(input => {
+            input.readOnly = true;
+        });
+
         const roomStatus = data.room_status;
         Object.keys(roomStatus).forEach((roomNumber) => {
           const roomPeriods = roomStatus[roomNumber];
@@ -62,9 +66,10 @@ const retrieveCurrentReservation = () => {
               : "lightgreen";
           }
         });
-        cancelButton.style.display = "none";
-        submitButton.style.display = "block";
-      } else {
+        cancelButton.style.display = "block";
+        submitButton.style.display = "none";
+      } 
+      else {
         const roomStatus = data.room_status;
         Object.keys(roomStatus).forEach((roomNumber) => {
           const roomPeriods = roomStatus[roomNumber];
@@ -97,9 +102,9 @@ function updateCheckboxesForRoom(roomNumber, roomStatus) {
   checkboxes.period3.disabled = roomPeriods.period3;
 
   // Apply styles based on availability
-  checkboxes.period1.style.opacity = roomPeriods.period1 ? "1" : "0.7";
-  checkboxes.period2.style.opacity = roomPeriods.period2 ? "1" : "0.7";
-  checkboxes.period3.style.opacity = roomPeriods.period3 ? "1" : "0.7";
+  checkboxes.period1.style.opacity = roomPeriods.period1 ? "1" : "0.9";
+  checkboxes.period2.style.opacity = roomPeriods.period2 ? "1" : "0.9";
+  checkboxes.period3.style.opacity = roomPeriods.period3 ? "1" : "0.9";
 }
 
 function gatherFormData() {
@@ -175,6 +180,7 @@ const deleteReservation = async () => {
 
 submitButton.addEventListener("click", async () => {
   makeReservation();
+  window.reload();
 });
 cancelButton.addEventListener("click", async () => {
   deleteReservation();
