@@ -15,7 +15,6 @@ const studentInputs = [
   document.getElementsByName("student5")[0],
   document.getElementsByName("student6")[0],
 ];
-
 const apiURL = "https://csiatech.kr/seminar/";
 
 const retrieveCurrentReservation = () => {
@@ -165,7 +164,6 @@ submitButton.addEventListener("click", async () => {
   });
   cancelButton.addEventListener("click", async () => {
     deleteReservation();
-    window.reload();
   });
 
 document.addEventListener("DOMContentLoaded", () => {
