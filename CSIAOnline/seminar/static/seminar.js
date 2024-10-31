@@ -48,8 +48,6 @@ const retrieveCurrentReservation = () => {
         checkboxes.period1.checked = data.period1;
         checkboxes.period2.checked = data.period2;
         checkboxes.period3.checked = data.period3;
-        submitButton.textContent = "취소";
-        submitButton.classList.add("delete");
 
         const roomNumber = data.room_number;
         const roomPeriods = data.room_status[roomNumber]
@@ -76,16 +74,6 @@ const retrieveCurrentReservation = () => {
     });
 };
 
-
-function resetForm() {
-  roomSelect.value = "1"; // Set Room 1 as default
-  studentInputs.forEach((input) => (input.value = "")); // Clear student fields
-  checkboxes.period1.checked = false;
-  checkboxes.period2.checked = false;
-  checkboxes.period3.checked = false;
-  submitButton.textContent = "Reserve";
-  submitButton.classList.remove("delete");
-}
 
 function updateCheckboxesForRoom(roomNumber, roomStatus) {
   const roomPeriods = roomStatus[roomNumber];
