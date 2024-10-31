@@ -3,6 +3,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponseRedirect
 from .models import Reservation, Room
 import json
+from django.db.models import Q
+
 
 def update_room_status():
     # Fetch all Room objects and reset all periods to False
@@ -30,6 +32,7 @@ def update_room_status():
 
     return JsonResponse({"status": "Rooms updated based on reservations"})
 
+
 @csrf_exempt
 def seminar_room_view(request):
 
@@ -47,32 +50,35 @@ def seminar_room_view(request):
             reservation_data.get("student5"),
             reservation_data.get("student6"),
         ]
+        print(student_ids)
 
         # Delete the reservation
         Reservation.objects.filter(
-            room_number=room_number,
-            student1=student_ids[
-                0
-            ],  # Assuming you're only using the first student ID for deletion
-            period1=reservation_data.get("period1"),
-            period2=reservation_data.get("period2"),
-            period3=reservation_data.get("period3"),
+            Q(room_number=room_number)
+            & Q(student1__contains=str(student_ids[0]))
+            & Q(period1=reservation_data.get("period1"))
+            & Q(period2=reservation_data.get("period2"))
+            & Q(period3=reservation_data.get("period3"))
         ).delete()
 
         # Update room status
         update_room_status()
 
         return JsonResponse({"status": "canceled"})
-    
+
     if request.method == "GET" and request.headers.get("type") == "retrieve":
         print("GET recieved")
         current_student_id = request.user.id
         print(current_student_id)
-        
 
         # Retrieve the reservation details for the logged-in student
         student_reservation = Reservation.objects.filter(
-            student1=current_student_id
+            Q(student1__contains=str(current_student_id))
+            | Q(student2__contains=str(current_student_id))
+            | Q(student3__contains=str(current_student_id))
+            | Q(student4__contains=str(current_student_id))
+            | Q(student5__contains=str(current_student_id))
+            | Q(student6__contains=str(current_student_id))
         ).first()
 
         # Fetch all room statuses
@@ -85,7 +91,6 @@ def seminar_room_view(request):
             }
             for room in rooms
         }
-
 
         if student_reservation:
             student1 = student_reservation.student1
@@ -115,7 +120,7 @@ def seminar_room_view(request):
             }  # No reservation found, but include room status
 
         return JsonResponse(data)
-    
+
     if request.method == "POST":
 
         reservation_data = json.loads(request.body)
@@ -153,7 +158,6 @@ def seminar_room_view(request):
 
         return JsonResponse({"status": "reserved"})
 
-
     # Retrieve the reservation details for the logged-in student
     student_reservation = Reservation.objects.filter(
         student1=current_student_id
@@ -178,5 +182,3 @@ def seminar_room_view(request):
     }
 
     return render(request, "seminar.html", context)
-
-    

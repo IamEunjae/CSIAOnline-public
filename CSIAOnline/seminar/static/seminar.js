@@ -1,5 +1,6 @@
 const form = document.getElementById("reservation-form");
-const submitButton = document.getElementById("submit-btn");
+const submitButton = document.getElementById("reserve");
+const cancelButton = document.getElementById("cancel");
 const roomSelect = document.getElementById("room");
 const checkboxes = {
   period1: document.getElementById("period1"),
@@ -15,14 +16,14 @@ const studentInputs = [
   document.getElementsByName("student6")[0],
 ];
 
-const apiURL = "https://csiatech.kr/seminar";
+const apiURL = "http://csiatech.kr/seminar/";
 
 const retrieveCurrentReservation = () => {
   fetch(apiURL, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "type": "retrieve"
+      "type" : "retrieve",
     },
   })
     .then((response) => {
@@ -46,26 +47,34 @@ const retrieveCurrentReservation = () => {
         checkboxes.period1.checked = data.period1;
         checkboxes.period2.checked = data.period2;
         checkboxes.period3.checked = data.period3;
-        submitButton.textContent = "취소";
-        submitButton.classList.add("delete");
+        cancelButton.style.display = "block";
+        submitButton.style.display = "none";
 
         const roomNumber = data.room_number;
-        const roomPeriods = data.room_status[roomNumber]
-          for (let period = 1; period <= 3; period++) {
-            const periodElement = document.getElementById(`room-${roomNumber}-${period}`);
-            periodElement.style.backgroundColor = roomPeriods[`period${period}`] ? "lightcoral" : "lightgreen";
-          }
+        const roomPeriods = data.room_status[roomNumber];
+        for (let period = 1; period <= 3; period++) {
+          const periodElement = document.getElementById(
+            `room-${roomNumber}-${period}`
+          );
+          periodElement.style.backgroundColor = roomPeriods[`period${period}`]
+            ? "lightcoral"
+            : "lightgreen";
         }
-          else {
-
+      } else {
         const roomStatus = data.room_status;
         Object.keys(roomStatus).forEach((roomNumber) => {
           const roomPeriods = roomStatus[roomNumber];
           for (let period = 1; period <= 3; period++) {
-            const periodElement = document.getElementById(`room-${roomNumber}-${period}`);
-            periodElement.style.backgroundColor = roomPeriods[`period${period}`] ? "lightcoral" : "lightgreen";
+            const periodElement = document.getElementById(
+              `room-${roomNumber}-${period}`
+            );
+            periodElement.style.backgroundColor = roomPeriods[`period${period}`]
+              ? "lightcoral"
+              : "lightgreen";
           }
         });
+        cancelButton.style.display = "none";
+        submitButton.style.display = "block";
       }
       updateCheckboxesForRoom(roomSelect.value, data.room_status);
     })
@@ -73,17 +82,6 @@ const retrieveCurrentReservation = () => {
       console.error("Error in retrieveCurrentReservation:", error);
     });
 };
-
-
-function resetForm() {
-  roomSelect.value = "1"; // Set Room 1 as default
-  studentInputs.forEach((input) => (input.value = "")); // Clear student fields
-  checkboxes.period1.checked = false;
-  checkboxes.period2.checked = false;
-  checkboxes.period3.checked = false;
-  submitButton.textContent = "Reserve";
-  submitButton.classList.remove("delete");
-}
 
 function updateCheckboxesForRoom(roomNumber, roomStatus) {
   const roomPeriods = roomStatus[roomNumber];
@@ -129,7 +127,9 @@ const makeReservation = async () => {
     .then((response) => {
       if (!response.ok) {
         // JSON으로 파싱 전에 에러 응답 메시지를 확인하고, 적절히 처리합니다.
-        throw new Error(`Server error: ${response.status} ${response.statusText}`);
+        throw new Error(
+          `Server error: ${response.status} ${response.statusText}`
+        );
       }
       return response.json();
     })
@@ -138,7 +138,7 @@ const makeReservation = async () => {
       console.log("got response");
       if (data.status === "reserved") {
         alert("Successfully reserved");
-        location.reload()
+        location.reload();
       } else {
         console.error("Error", data);
       }
@@ -157,33 +157,30 @@ const deleteReservation = async () => {
     },
     body: JSON.stringify(reservationData),
   })
-    .then(response => {
+    .then((response) => {
       if (!response.ok) {
-        throw new Error('Failed to delete reservation');
+        throw new Error("Failed to delete reservation");
       }
       return response.json();
     })
-    .catch(error => {
+    .catch((error) => {
       console.error("Error deleting reservation:", error);
       throw error; // Re-throw the error if you want to handle it later
     });
 };
 
-
 submitButton.addEventListener("click", async () => {
-  let data;
-  if (submitButton.classList.contains("delete")) {
-    deleteReservation();
-  } else {
-    makeReservation();
-  }
+  makeReservation();
+});
+cancelButton.addEventListener("click", async () => {
+  deleteReservation();
+  window.reload();
 });
 
 document.addEventListener("DOMContentLoaded", () => {
   retrieveCurrentReservation();
 
   roomSelect.addEventListener("change", async (event) => {
-    const roomStatus = await retrieveCurrentReservation();
-    updateCheckboxesForRoom(event.target.value, roomStatus.room_status);
+    retrieveCurrentReservation();
   });
 });

@@ -158,7 +158,7 @@
             gap: 10px;
         }
 
-        button {
+        #reserve {
             background-color: #4e73df;
             color: white;
             border: none;
@@ -169,8 +169,15 @@
             width: 100%;
         }
 
-        button:hover {
-            background-color: #2e59d9;
+        #cancel {
+            background-color: lightcoral;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            width: 100%;
         }
 
         .room-grid {
@@ -209,6 +216,7 @@
             background-color: #d1e7ff;
             color: #2e59d9;
         }
+
 
 /* Media queries */
     @media (max-width: 850px) {
@@ -285,7 +293,7 @@
         <h2>In School</h2>
         <ul>
             <li><a class="nav-link" value="yaja">야자</a></li>
-            <li><a class="nav-link" value="seminar">세미나실</a></li>
+            <li><a class="nav-link" id="working" value="counsel">상담실(개발중)</a></li>
             <li><a class="nav-link" id="working" value="club">동아리(개발중)</a></li>
         </ul>
         <div class="footer">
@@ -340,7 +348,8 @@
                 </div>
             </div>
 
-            <button type="button" id="submit-btn">신청</button>
+            <button type="button" id="reserve">신청</button>
+            <button type="button" id="cancel">취소</button>
         </div>
 
         <!-- Status Section -->
