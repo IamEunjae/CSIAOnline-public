@@ -29,6 +29,7 @@ class Command(BaseCommand):
                 "period3": reservation.period3,
             }
             reservation_data.append(reservation_entry)
+        print(reservation_data)
 
         # Send data to Google Sheets API endpoint via Apps Script Web App URL
         web_app_url = "https://script.google.com/macros/s/AKfycbzjoegmShNj9uKy8SbmqCeFvS3qVNeM80uolLIqBpowEg8BpIxrZyFSv9EghKp0SVs/exec"
