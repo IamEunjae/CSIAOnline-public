@@ -1,10 +1,7 @@
-# seminar/management/commands/updateSeminar.py
-
 from django.core.management.base import BaseCommand
 from seminar.models import Reservation
 import requests
 import json
-
 
 class Command(BaseCommand):
     help = "Update Google Sheets with seminar room reservations."
@@ -17,7 +14,7 @@ class Command(BaseCommand):
         reservation_data = []
         for reservation in reservations:
             reservation_entry = {
-                "room_number": reservation.room_number,  # Use the room_number as-is
+                "room_number": reservation.room_number,
                 "student1": reservation.student1,
                 "student2": reservation.student2,
                 "student3": reservation.student3,
@@ -29,15 +26,27 @@ class Command(BaseCommand):
                 "period3": reservation.period3,
             }
             reservation_data.append(reservation_entry)
-        print(reservation_data)
+        
+        payload = {"reservations": reservation_data}
+        self.stdout.write(f"Sending payload: {json.dumps(payload, ensure_ascii=False, indent=2)}")
 
-        # Send data to Google Sheets API endpoint via Apps Script Web App URL
-        web_app_url = "https://script.google.com/macros/s/AKfycbx45esj0CEIDNIYd1puI7OLsAR-SbWKE5wdr2Tn9hDZ8OZhDaBtIUz-pWrOoM7JVxJ3/exec"
-        response = requests.post(
-            web_app_url, data=json.dumps({"reservations": reservation_data})
-        )
-
-        if response.status_code == 200:
-            self.stdout.write(self.style.SUCCESS("Google Sheets updated successfully"))
-        else:
-            self.stdout.write(self.style.ERROR("Failed to update Google Sheets"))
+        # Send data to Google Sheets API endpoint
+        web_app_url = "https://script.google.com/macros/s/AKfycbyAtwrXNjWID_st8NX-MqhoUrF1x2M9bkkrINhF4V85KdC4UiBmv-_-1QLo7UyteN5U/exec"
+        
+        try:
+            response = requests.post(
+                web_app_url,
+                json=payload,  # Changed from data=json.dumps(payload)
+                headers={'Content-Type': 'application/json'}
+            )
+            
+            self.stdout.write(f"Response status code: {response.status_code}")
+            self.stdout.write(f"Response content: {response.text}")
+            
+            if response.status_code == 200:
+                self.stdout.write(self.style.SUCCESS("Google Sheets updated successfully"))
+            else:
+                self.stdout.write(self.style.ERROR(f"Failed to update Google Sheets: {response.text}"))
+                
+        except requests.exceptions.RequestException as e:
+            self.stdout.write(self.style.ERROR(f"Request failed: {str(e)}"))
