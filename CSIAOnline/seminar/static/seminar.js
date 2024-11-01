@@ -47,11 +47,16 @@ const retrieveCurrentReservation = () => {
         checkboxes.period1.checked = data.period1;
         checkboxes.period2.checked = data.period2;
         checkboxes.period3.checked = data.period3;
+
+        if (!checkboxes.period1.checked) checkboxes.period1.disabled = true;
+        if (!checkboxes.period2.checked) checkboxes.period2.disabled = true;
+        if (!checkboxes.period3.checked) checkboxes.period3.disabled = true;
+
         cancelButton.style.display = "block";
         submitButton.style.display = "none";
 
-        studentInputs.forEach(input => {
-            input.readOnly = true;
+        studentInputs.forEach((input) => {
+          input.readOnly = true;
         });
 
         const roomStatus = data.room_status;
@@ -68,8 +73,7 @@ const retrieveCurrentReservation = () => {
         });
         cancelButton.style.display = "block";
         submitButton.style.display = "none";
-      } 
-      else {
+      } else {
         const roomStatus = data.room_status;
         Object.keys(roomStatus).forEach((roomNumber) => {
           const roomPeriods = roomStatus[roomNumber];
@@ -146,7 +150,6 @@ const makeReservation = async () => {
       console.log(data);
       console.log("got response");
       if (data.status === "reserved") {
-
       } else {
         console.error("Error", data);
       }
@@ -178,8 +181,9 @@ const deleteReservation = async () => {
 };
 
 submitButton.addEventListener("click", async () => {
-  if (studentInputs[0].value) {  // Check if the first student input is not empty
-    await makeReservation();      // Ensure makeReservation is awaited
+  if (studentInputs[0].value) {
+    // Check if the first student input is not empty
+    await makeReservation(); // Ensure makeReservation is awaited
     alert("Successfully reserved");
     location.reload();
   } else {
