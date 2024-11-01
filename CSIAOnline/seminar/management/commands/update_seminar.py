@@ -31,7 +31,7 @@ class Command(BaseCommand):
         self.stdout.write(f"Sending payload: {json.dumps(payload, ensure_ascii=False, indent=2)}")
 
         # Send data to Google Sheets API endpoint
-        web_app_url = "https://script.google.com/macros/s/AKfycbyL8LHc1xCGruwIJ7D9bZeJVM2lEpCIhR72YsMJqNlMrRfQ_iNsALI3INf9mydoI4Es/exec"
+        web_app_url = "https://script.google.com/macros/s/AKfycbwe1QRjJ1TIrbW0ObiGdi9tExqu1oeRuOlfR5zD2ODvjqipx-rmcZkuRmTflsJBHNA/exec"
         
         try:
             response = requests.post(
