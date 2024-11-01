@@ -32,7 +32,7 @@ class Command(BaseCommand):
         print(reservation_data)
 
         # Send data to Google Sheets API endpoint via Apps Script Web App URL
-        web_app_url = "https://script.google.com/macros/s/AKfycbxc8eIUyELMuL7WG-DgpUF4Kmg4w7WHY82X3FD6K7mYrJFKdZGr9tCtom3BvccCoZvY/exec"
+        web_app_url = "https://script.google.com/macros/s/AKfycbynw4ZxlAmb0zHPY21arpLFbXZPM-lYnqmPYBaGBxxR-DP_WYoD4uhflSP62lV0Au77/exec"
         response = requests.post(
             web_app_url, data=json.dumps({"reservations": reservation_data})
         )
