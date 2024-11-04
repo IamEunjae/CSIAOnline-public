@@ -3,7 +3,7 @@ import datetime
 from ...models import Monday, Tuesday, Wednesday, Thursday  # Update with your app name
 from django.core.management.base import BaseCommand
 
-GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwxOD1A6UE9duo0b_Lntp5CkEh7z4raEMPUynpJ7K1WuaCdz-yVs69q8lmAj-xOGeDA/exec"
+GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyJoURnLH1OwZQlcYsGF7TPwr9e47Jl52iDA1RD5CnSLaHxuCMBA7yn2OUdF4Otw9z6/exec"
 
 
 def fetch_schedule():
@@ -39,7 +39,9 @@ def update_google_sheet():
         )
     print(updates)
 
-    response = requests.post(GOOGLE_APPS_SCRIPT_URL, json=updates)
+    response = requests.post(
+        GOOGLE_APPS_SCRIPT_URL, json=updates, headers={"type": "yaja"}
+    )
     if response.status_code == 200:
         print("Google Sheet updated successfully.")
     else:

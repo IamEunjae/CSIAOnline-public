@@ -47,10 +47,12 @@ def reset_schedules(user):
         DefaultMonday.DoesNotExist,
         DefaultTuesday.DoesNotExist,
         DefaultWednesday.DoesNotExist,
-        DefaultThursday.DoesNotExist,):
+        DefaultThursday.DoesNotExist,
+    ):
         return None
-    
-    return ({"status":"success", "endswith":"terminated"})
+
+    return {"status": "success", "endswith": "terminated"}
+
 
 class Command(BaseCommand):
     print("command called on reset_schedules.py")
@@ -59,12 +61,20 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         today = timezone.now().date()
         for user in CustomUser.objects.all():
-            if(user.student_id=="11111"):
+            if user.student_id == "11111":
                 continue
             print(type(user.student_id))
             print(user.student_id)
             result = reset_schedules(user.student_id)
             if result["status"] == "success":
-                self.stdout.write(self.style.SUCCESS(f"Successfully reset schedules for user {user.student_id}"))
+                self.stdout.write(
+                    self.style.SUCCESS(
+                        f"Successfully reset schedules for user {user.student_id}"
+                    )
+                )
             else:
-                self.stdout.write(self.style.WARNING(f"Failed to reset schedules for user {user.student_id}: {result.get('message', '')}"))
+                self.stdout.write(
+                    self.style.WARNING(
+                        f"Failed to reset schedules for user {user.student_id}: {result.get('message', '')}"
+                    )
+                )
