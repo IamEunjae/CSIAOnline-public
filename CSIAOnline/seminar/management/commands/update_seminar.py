@@ -31,11 +31,11 @@ class Command(BaseCommand):
         self.stdout.write(f"Sending payload: {json.dumps(payload, ensure_ascii=False, indent=2)}")
 
         # Send data to Google Sheets API endpoint
-        web_app_url = "https://script.google.com/macros/s/AKfycbwe1QRjJ1TIrbW0ObiGdi9tExqu1oeRuOlfR5zD2ODvjqipx-rmcZkuRmTflsJBHNA/exec"
+        GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzlSJBOLUuDfKxoC_fpDaOLYAleytAlikMzC2JF3kg1_w0T4a-aHBd464vaQDKd1Eow/exec"
         
         try:
             response = requests.post(
-                web_app_url,
+                GOOGLE_APPS_SCRIPT_URL,
                 json=payload,  # Changed from data=json.dumps(payload)
                 headers={'Content-Type': 'application/json'}
             )
