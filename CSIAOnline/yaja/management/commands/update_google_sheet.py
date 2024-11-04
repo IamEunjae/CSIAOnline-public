@@ -3,12 +3,12 @@ import datetime
 from ...models import Monday, Tuesday, Wednesday, Thursday  # Update with your app name
 from django.core.management.base import BaseCommand
 
-GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzlSJBOLUuDfKxoC_fpDaOLYAleytAlikMzC2JF3kg1_w0T4a-aHBd464vaQDKd1Eow/exec"
+GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxG7PNJkYJRBjeSNOi6Cj7GaPf0-cUnzM54qqXE2ONMD_TCA_q5wYiyHdRC5njutCxZ/exec"
 
 
 def fetch_schedule():
     day_of_week = datetime.datetime.today().weekday()
-    if day_of_week in [0, 4, 5, 6]:
+    if day_of_week in [0, 4, 5, 6]:  # Assuming Monday to be used on weekends as well
         schedules = Monday.objects.all()
     elif day_of_week == 1:
         schedules = Tuesday.objects.all()
@@ -27,6 +27,7 @@ def update_google_sheet():
         print("No schedules to update for today.")
         return
 
+    # Prepare the payload with type and updates
     updates = []
     for schedule in schedules:
         updates.append(
@@ -37,10 +38,13 @@ def update_google_sheet():
                 "period3": schedule.period3,
             }
         )
-    print(updates)
+
+    payload = {"type": "yaja", "updates": updates}
+
+    print("Payload to send:", payload)
 
     response = requests.post(
-        GOOGLE_APPS_SCRIPT_URL, json=updates, headers={"type": "yaja"}
+        GOOGLE_APPS_SCRIPT_URL, json=payload  # Send the payload as JSON
     )
     if response.status_code == 200:
         print("Google Sheet updated successfully.")

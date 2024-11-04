@@ -3,6 +3,7 @@ from seminar.models import Reservation
 import requests
 import json
 
+
 class Command(BaseCommand):
     help = "Update Google Sheets with seminar room reservations."
 
@@ -26,27 +27,33 @@ class Command(BaseCommand):
                 "period3": reservation.period3,
             }
             reservation_data.append(reservation_entry)
-        
-        payload = {"reservations": reservation_data}
-        self.stdout.write(f"Sending payload: {json.dumps(payload, ensure_ascii=False, indent=2)}")
+
+        payload = {"type": "seminar", "reservations": reservation_data}
+        self.stdout.write(
+            f"Sending payload: {json.dumps(payload, ensure_ascii=False, indent=2)}"
+        )
 
         # Send data to Google Sheets API endpoint
-        GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzlSJBOLUuDfKxoC_fpDaOLYAleytAlikMzC2JF3kg1_w0T4a-aHBd464vaQDKd1Eow/exec"
-        
+        GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxG7PNJkYJRBjeSNOi6Cj7GaPf0-cUnzM54qqXE2ONMD_TCA_q5wYiyHdRC5njutCxZ/exec"
+
         try:
             response = requests.post(
                 GOOGLE_APPS_SCRIPT_URL,
                 json=payload,  # Changed from data=json.dumps(payload)
-                headers={'Content-Type': 'application/json'}
+                headers={"Content-Type": "application/json"},
             )
-            
+
             self.stdout.write(f"Response status code: {response.status_code}")
             self.stdout.write(f"Response content: {response.text}")
-            
+
             if response.status_code == 200:
-                self.stdout.write(self.style.SUCCESS("Google Sheets updated successfully"))
+                self.stdout.write(
+                    self.style.SUCCESS("Google Sheets updated successfully")
+                )
             else:
-                self.stdout.write(self.style.ERROR(f"Failed to update Google Sheets: {response.text}"))
-                
+                self.stdout.write(
+                    self.style.ERROR(f"Failed to update Google Sheets: {response.text}")
+                )
+
         except requests.exceptions.RequestException as e:
             self.stdout.write(self.style.ERROR(f"Request failed: {str(e)}"))
