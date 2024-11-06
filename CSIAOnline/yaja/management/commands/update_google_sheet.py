@@ -3,7 +3,7 @@ import datetime
 from ...models import Monday, Tuesday, Wednesday, Thursday  # Update with your app name
 from django.core.management.base import BaseCommand
 
-GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwISB-UcrIoq6GQOKzC0xbFaGhl5GpaGWP-TEIXO7LIXO9G6hbSeOreioEFURPJOJvu/exec"
+GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxara4OXHc7uibNKbiUZCkGZVPy4ZuSRhzasATqZZr0H4CdVwlBmiCqZLI-VmV37ma3/exec"
 
 
 def fetch_schedule():
