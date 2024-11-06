@@ -407,8 +407,8 @@
                 <a class="nav-link" value = "yaja">
                     <span>야자</span>
                 </a>
-                <a class="nav-link" id = "working" value = "counsel">
-                    <span>상담실(개발중)</span>
+                <a class="nav-link"  value = "seminar">
+                    <span>세미나실</span>
                 </a>
                 <a class="nav-link" id = "working" value = "club">
                     <span>동아리(개발중)</span>
@@ -508,6 +508,19 @@
     <!-- End of Content Wrapper -->
     
     <script src="../static/seminar.js"></script>
+    <script>
+        const apiURL = "https://csiatech.kr/";
+        
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default link behavior
+                const value = link.getAttribute('value');
+                if (value) {
+                    window.location.href = apiURL + value;
+                }
+            });
+        });
+    </script>
 
 </body>
 
