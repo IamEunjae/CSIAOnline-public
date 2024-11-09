@@ -85,13 +85,13 @@ CELERY_BEAT_SCHEDULE = {
         "task": "yaja.tasks.run_update_script",
         "schedule": crontab(hour=17, minute=29, day_of_week="mon-fri"),
     },
-    "run-clear-room-every-day-12am": {
+    "run-clear-room-every-day-8am": {
         "task": "seminar.tasks.run_clear_room",
-        "schedule": crontab(hour=0, minute=0),
+        "schedule": crontab(hour=8, minute=0),
     },
-    "run-update-seminar-every-day-9am": {
+    "run-update-seminar-every-day-1pm": {
         "task": "seminar.tasks.run_update_seminar",
-        "schedule": crontab(hour=12, minute=0),
+        "schedule": crontab(hour=13, minute=00),
     },
 }
 

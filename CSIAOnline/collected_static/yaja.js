@@ -1,5 +1,6 @@
 // Function to update the entire schedule
 // Function to get the selected value of a dropdown
+// 수정중 yaja.js
 
 apiURL = "https://csiatech.kr/";
 
@@ -198,6 +199,7 @@ function retrieveDefaultSchedule() {
           inputElementWednesday1.value = valueWednesday1;
         }
 
+// 이어서 작성된 코드입니다.
         const valueThursday1 = data.thursday.period1;
         if (
           ["외출/현체", "조퇴", "야자", "주문형강좌/방과후"].includes(
@@ -236,6 +238,7 @@ function retrieveDefaultSchedule() {
           inputElementTuesday2.style.display = "block";
           inputElementTuesday2.value = valueTuesday2;
         }
+
         const valueWednesday2 = data.wednesday.period2;
         if (
           ["외출/현체", "조퇴", "야자", "주문형강좌/방과후"].includes(
@@ -319,6 +322,7 @@ function retrieveDefaultSchedule() {
       console.error("Error in retrieveDefaultSchedule:", error);
     });
 }
+
 
 // Function to update today's schedule
 function updateWeekSchedule() {

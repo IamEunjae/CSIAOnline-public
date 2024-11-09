@@ -509,14 +509,15 @@
     
     <script src="../static/seminar.js"></script>
     <script>
-        const apiURL = "https://csiatech.kr/";
-        
+ 
+	const HomeURL = "https://csiatech.kr/";
+
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function(event) {
                 event.preventDefault(); // Prevent default link behavior
                 const value = link.getAttribute('value');
                 if (value) {
-                    window.location.href = apiURL + value;
+                    window.location.href = HomeURL + value;
                 }
             });
         });
