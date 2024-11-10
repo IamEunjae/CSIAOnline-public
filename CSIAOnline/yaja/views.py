@@ -1,5 +1,6 @@
 # views.py
 from django.shortcuts import render
+from datetime import timezone
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponseRedirect
@@ -70,10 +71,22 @@ def ensure_schedule_exists(student_id):
 
 @csrf_exempt
 def yaja_view(request):
-    if not request.user.is_authenticated:
+    if not request.user.is_authenticated or "user_id" not in request.session:
+        request.session.flush()
         return HttpResponseRedirect("https://csiatech.kr/")
 
+    # Verify session matches current user
+    session_student_id = request.session.get("student_id")
     current_student_id = request.user.student_id
+
+    if session_student_id != current_student_id:
+        # Session mismatch - force relogin
+        request.session.flush()
+        return HttpResponseRedirect("https://csiatech.kr/")
+
+    # Update session last activity
+    request.session["last_activity"] = str(timezone.now())
+
     schedule = get_schedule_model_for_current_day(current_student_id)
     ensure_schedule_exists(current_student_id)
     try:

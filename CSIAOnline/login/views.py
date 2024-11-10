@@ -14,20 +14,29 @@ def custom_login(request):
         student_id = data.get("student_id")
         password = data.get("password")
 
-        # Check if there is any matching object in the CustomUser table
         try:
             user = CustomUser.objects.get(student_id=student_id, password=password)
+
+            # Clear any existing sessions for this user
             request.session.flush()
-            # Log in the user for the current session
+
+            # Log in the user
             login(request, user)
 
-            # Automatically expire any existing session when logging in again
-            request.session.set_expiry(0)
+            # Configure session settings
+            request.session["user_id"] = user.id
+            request.session["student_id"] = student_id
 
-            # Return a success response
-            return JsonResponse({"status": "success"})
+            request.session.set_expiry(1800)  # 30 minutes in seconds
+
+            # Set session cookie settings
+            request.session.set_test_cookie()
+
+            return JsonResponse(
+                {"status": "success", "session_id": request.session.session_key}
+            )
+
         except CustomUser.DoesNotExist:
-            # If no match is found, return an error message
             return JsonResponse(
                 {"error": "Invalid login credentials. Please check your inputs."},
                 status=400,
