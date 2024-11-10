@@ -17,8 +17,13 @@ def custom_login(request):
         # Check if there is any matching object in the CustomUser table
         try:
             user = CustomUser.objects.get(student_id=student_id, password=password)
+            request.session.flush()
             # Log in the user for the current session
             login(request, user)
+
+            # Automatically expire any existing session when logging in again
+            request.session.set_expiry(0)
+
             # Return a success response
             return JsonResponse({"status": "success"})
         except CustomUser.DoesNotExist:

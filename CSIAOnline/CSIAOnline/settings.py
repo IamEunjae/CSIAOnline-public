@@ -224,3 +224,14 @@ STATICFILES_FINDERS = [
 ]
 
 STATIC_ROOT = BASE_DIR / "collected_static"
+
+
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+
+# Set a session expiration time (optional)
+SESSION_COOKIE_AGE = 1800  # 30 minutes
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# Secure cookies (recommended for production)
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
