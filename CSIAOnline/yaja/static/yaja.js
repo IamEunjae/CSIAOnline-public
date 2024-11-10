@@ -199,7 +199,7 @@ function retrieveDefaultSchedule() {
           inputElementWednesday1.value = valueWednesday1;
         }
 
-// 이어서 작성된 코드입니다.
+        // 이어서 작성된 코드입니다.
         const valueThursday1 = data.thursday.period1;
         if (
           ["외출/현체", "조퇴", "야자", "주문형강좌/방과후"].includes(
@@ -322,7 +322,6 @@ function retrieveDefaultSchedule() {
       console.error("Error in retrieveDefaultSchedule:", error);
     });
 }
-
 
 // Function to update today's schedule
 function updateWeekSchedule() {
@@ -649,67 +648,6 @@ document.querySelectorAll(".navbar-brand").forEach((link) => {
     const value = link.getAttribute("value");
     if (value) {
       window.location.href = apiURL + value;
-    }
-  });
-});
-
-document.querySelectorAll(".period-select").forEach((select) => {
-  select.addEventListener("change", function () {
-    const customInputId = `${this.id}-input`;
-    const customInput = document.getElementById(customInputId);
-
-    if (this.value === "기타") {
-      customInput.style.display = "block";
-    } else {
-      customInput.style.display = "none";
-    }
-
-    const day = this.id.split("-")[1];
-    if (this.value === "조퇴") {
-      const period1 = document.getElementById(`period1-${day}`).value;
-      const period2 = document.getElementById(`period2-${day}`).value;
-      const period3 = document.getElementById(`period3-${day}`).value;
-
-      if (period1 !== "외출/현체") {
-        document.getElementById(`period1-${day}`).value = "조퇴";
-      }
-      if (period2 !== "외출/현체") {
-        document.getElementById(`period2-${day}`).value = "조퇴";
-      }
-      if (period3 !== "외출/현체") {
-        document.getElementById(`period3-${day}`).value = "조퇴";
-      }
-    }
-  });
-});
-
-document.querySelectorAll(".week-period-select").forEach((select) => {
-  select.addEventListener("change", function () {
-    const parts = this.id.split("-");
-    const day = parts[2];
-    const customInputId = `default-${parts[1]}-${day}-input`;
-    const customInput = document.getElementById(customInputId);
-
-    if (this.value === "기타") {
-      customInput.style.display = "block";
-    } else {
-      customInput.style.display = "none";
-    }
-
-    if (this.value === "조퇴") {
-      const period1 = document.getElementById(`default-period1-${day}`).value;
-      const period2 = document.getElementById(`default-period2-${day}`).value;
-      const period3 = document.getElementById(`default-period3-${day}`).value;
-
-      if (period1 !== "외출/현체") {
-        document.getElementById(`default-period1-${day}`).value = "조퇴";
-      }
-      if (period2 !== "외출/현체") {
-        document.getElementById(`default-period2-${day}`).value = "조퇴";
-      }
-      if (period3 !== "외출/현체") {
-        document.getElementById(`default-period3-${day}`).value = "조퇴";
-      }
     }
   });
 });
