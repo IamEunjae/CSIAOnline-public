@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from simple_history.models import HistoricalRecords
 
 
 class Monday(models.Model):
@@ -7,6 +8,7 @@ class Monday(models.Model):
     period2 = models.CharField(max_length=50)
     period3 = models.CharField(max_length=50)
     student_id = models.CharField(max_length=10, null=True, blank=True)
+    history = HistoricalRecords()
 
 
 class Tuesday(models.Model):
@@ -14,6 +16,7 @@ class Tuesday(models.Model):
     period2 = models.CharField(max_length=50)
     period3 = models.CharField(max_length=50)
     student_id = models.CharField(max_length=10, null=True, blank=True)
+    history = HistoricalRecords()
 
 
 class Wednesday(models.Model):
@@ -21,6 +24,7 @@ class Wednesday(models.Model):
     period2 = models.CharField(max_length=50)
     period3 = models.CharField(max_length=50)
     student_id = models.CharField(max_length=10, null=True, blank=True)
+    history = HistoricalRecords()
 
 
 class Thursday(models.Model):
@@ -28,6 +32,7 @@ class Thursday(models.Model):
     period2 = models.CharField(max_length=50)
     period3 = models.CharField(max_length=50)
     student_id = models.CharField(max_length=10, null=True, blank=True)
+    history = HistoricalRecords()
 
 
 # Default schedules for users
@@ -36,6 +41,7 @@ class DefaultMonday(models.Model):
     period1 = models.CharField(max_length=50)
     period2 = models.CharField(max_length=50)
     period3 = models.CharField(max_length=50)
+    history = HistoricalRecords()
 
 
 class DefaultTuesday(models.Model):
@@ -43,6 +49,7 @@ class DefaultTuesday(models.Model):
     period1 = models.CharField(max_length=50)
     period2 = models.CharField(max_length=50)
     period3 = models.CharField(max_length=50)
+    history = HistoricalRecords()
 
 
 class DefaultWednesday(models.Model):
@@ -50,6 +57,7 @@ class DefaultWednesday(models.Model):
     period1 = models.CharField(max_length=50)
     period2 = models.CharField(max_length=50)
     period3 = models.CharField(max_length=50)
+    history = HistoricalRecords()
 
 
 class DefaultThursday(models.Model):
@@ -57,3 +65,4 @@ class DefaultThursday(models.Model):
     period1 = models.CharField(max_length=50)
     period2 = models.CharField(max_length=50)
     period3 = models.CharField(max_length=50)
+    history = HistoricalRecords()

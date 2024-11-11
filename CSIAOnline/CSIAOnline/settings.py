@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "questions",
     "club",
     "seminar",
+    "simple_history",
 ]
 
 CELERY_BROKER_URL = "redis://localhost:6379"
@@ -114,6 +115,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "corsheaders.middleware.CorsMiddleware",
+    "simple_history.middleware.HistoryRequestMiddleware",
 ]
 
 ROOT_URLCONF = "CSIAOnline.urls"
