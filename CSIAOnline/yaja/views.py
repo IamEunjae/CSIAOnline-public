@@ -384,9 +384,10 @@ def yaja_view(request):
                 "wednesday": serializer_wednesday.data,
                 "thursday": serializer_thursday.data,
                 "action": "retrieve",
+                "type": "default",
             }
 
-            print("default data" + response_data)
+            print(response_data)
 
             return JsonResponse(response_data)
         elif request.headers.get("X-Schedule-Type") == "current":
