@@ -386,6 +386,8 @@ def yaja_view(request):
                 "action": "retrieve",
             }
 
+            print("default data" + response)
+
             return JsonResponse(response_data)
         elif request.headers.get("X-Schedule-Type") == "current":
             print("GET current schedule backend success reached")

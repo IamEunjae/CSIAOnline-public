@@ -619,7 +619,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .getElementById("defaultForm")
     .addEventListener("submit", function (event) {
       console.log("clickeeed the submit button");
-      event.preventDefault();
       updateDefaultSchedule();
     });
 
@@ -627,7 +626,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .getElementById("modalpop")
     .addEventListener("click", function (event) {
       console.log("clickeeed to enable retrieveschedule");
-      event.preventDefault();
       retrieveDefaultSchedule();
     });
 });
