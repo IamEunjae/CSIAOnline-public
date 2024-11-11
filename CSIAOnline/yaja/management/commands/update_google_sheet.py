@@ -39,7 +39,7 @@ def update_google_sheet():
             }
         )
 
-    payload = {"type": "yaja", "updates": updates}
+    payload = {"type": "yaja_uds", "updates": updates}
 
     print("Payload to send:", payload)
 
