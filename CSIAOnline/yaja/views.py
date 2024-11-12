@@ -86,7 +86,6 @@ def yaja_view(request):
     # Update session last activity
 
     schedule = get_schedule_model_for_current_day(current_student_id)
-    ensure_schedule_exists(current_student_id)
     try:
         print(current_student_id)
 
@@ -309,9 +308,6 @@ def yaja_view(request):
                 Tuesday_serializer.save()
                 Wednesday_serializer.save()
                 Thursday_serializer.save()
-                print("before reset")
-                reset_schedules(current_student_id)
-                print("after reset")
                 return JsonResponse(
                     {"status": "echo", "student_id": current_student_id}, status=200
                 )
@@ -402,32 +398,6 @@ def yaja_view(request):
                 )
                 thursday_schedule = Thursday.objects.get(student_id=current_student_id)
                 print("All schedule retrieved")
-
-                # Check and assign "yaja" if any period is null
-                if not monday_schedule.period1:
-                    monday_schedule.period1 = "야자"
-                if not monday_schedule.period2:
-                    monday_schedule.period2 = "야자"
-                if not monday_schedule.period3:
-                    monday_schedule.period3 = "야자"
-                if not tuesday_schedule.period1:
-                    tuesday_schedule.period1 = "야자"
-                if not tuesday_schedule.period2:
-                    tuesday_schedule.period2 = "야자"
-                if not tuesday_schedule.period3:
-                    tuesday_schedule.period3 = "야자"
-                if not wednesday_schedule.period1:
-                    wednesday_schedule.period1 = "야자"
-                if not wednesday_schedule.period2:
-                    wednesday_schedule.period2 = "야자"
-                if not wednesday_schedule.period3:
-                    wednesday_schedule.period3 = "야자"
-                if not thursday_schedule.period1:
-                    thursday_schedule.period1 = "야자"
-                if not thursday_schedule.period2:
-                    thursday_schedule.period2 = "야자"
-                if not thursday_schedule.period3:
-                    thursday_schedule.period3 = "야자"
 
                 # Save the changes
                 monday_schedule.save()
