@@ -57,11 +57,16 @@ def ensure_schedule_exists(student_id):
 
 @transaction.atomic
 def update_schedule(model, student_id, data, serializer_class):
+    print(f"Updating {model.__name__} for student {student_id}")
     instance = model.objects.select_for_update().filter(student_id=student_id).first()
     serializer = serializer_class(instance, data=data, partial=True)
     if serializer.is_valid():
         serializer.save()
+        print(f"Successfully updated {model.__name__} for student {student_id}")
         return None
+    print(
+        f"Error updating {model.__name__} for student {student_id}: {serializer.errors}"
+    )
     return serializer.errors
 
 
@@ -84,6 +89,7 @@ def yaja_view(request):
 
     if request.method == "PUT":
         data = json.loads(request.body)
+        print(data)
         with transaction.atomic():
             errors = {}
             for day, model, serializer_class in [
@@ -108,6 +114,7 @@ def yaja_view(request):
 
     if request.method == "POST":
         data = json.loads(request.body)
+        print(data)
         with transaction.atomic():
             errors = {}
             for day, model, serializer_class in [
@@ -155,6 +162,8 @@ def yaja_view(request):
         response_data["action"] = "retrieve"
         if request.headers.get("X-Schedule-Type") == "default":
             response_data["type"] = "default"
+
+        print(response_data)
 
         return Response(response_data)
 
