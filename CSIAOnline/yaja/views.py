@@ -48,6 +48,7 @@ def update_schedule(model, student_id, data, serializer_class):
 
 
 @csrf_exempt
+@api_view(["GET", "PUT"])
 def yaja_view(request):
     if not request.user.is_authenticated or "user_id" not in request.session:
         request.session.flush()
