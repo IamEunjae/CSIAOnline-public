@@ -176,3 +176,11 @@ document.querySelectorAll(".period-select").forEach((select) => {
 document.addEventListener("DOMContentLoaded", (event) => {
   retrieveCurrentSchedule();
 });
+
+document
+  .getElementById("weekForm")
+  .addEventListener("submit", function (event) {
+    console.log("clickeeed the submit for today button");
+    event.preventDefault();
+    updateWeekSchedule();
+  });
