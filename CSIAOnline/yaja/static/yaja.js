@@ -44,6 +44,17 @@ function validateScheduleValues(updatedValues) {
   return true; // All values are valid
 }
 
+function getCSRFToken() {
+  const cookies = document.cookie.split(';');
+  for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.startsWith('csrftoken=')) {
+          return cookie.substring('csrftoken='.length, cookie.length);
+      }
+  }
+  return null;
+}
+
 function updateWeekSchedule() {
   let updatedValues = getSelectedValues();
 
@@ -58,6 +69,7 @@ function updateWeekSchedule() {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
+      'X-CSRFToken': getCSRFToken(), 
     },
     body: JSON.stringify(updatedValues),
   })
