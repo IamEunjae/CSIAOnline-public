@@ -181,7 +181,10 @@ const deleteReservation = async () => {
 };
 
 submitButton.addEventListener("click", async () => {
-  if (studentInputs[0].value) {
+  if (
+    studentInputs[0].value &&
+    Object.values(checkboxes).some((checkbox) => checkbox.checked)
+  ) {
     // Check if the first student input is not empty
     await makeReservation(); // Ensure makeReservation is awaited
     alert("Successfully reserved");
