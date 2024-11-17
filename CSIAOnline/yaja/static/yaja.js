@@ -25,32 +25,13 @@ function getSelectedValues() {
   return values;
 }
 
-function validateScheduleValues(updatedValues) {
-  // Define acceptable values
-  const acceptableValues = ["외출/현체", "조퇴", "야자", "주문형강좌/방과후"];
-
-  // Check if all selected values for each day and period are acceptable
-  for (const day in updatedValues) {
-    for (const period in updatedValues[day]) {
-      const value = updatedValues[day][period];
-      if (!acceptableValues.includes(value)) {
-        alert(
-          `Invalid value "${value}" selected for ${day} ${period}. Please select a valid option.`
-        );
-        return false; // Return false if any value is invalid
-      }
-    }
-  }
-  return true; // All values are valid
-}
-
 function getCSRFToken() {
-  const cookies = document.cookie.split(';');
+  const cookies = document.cookie.split(";");
   for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      if (cookie.startsWith('csrftoken=')) {
-          return cookie.substring('csrftoken='.length, cookie.length);
-      }
+    const cookie = cookies[i].trim();
+    if (cookie.startsWith("csrftoken=")) {
+      return cookie.substring("csrftoken=".length, cookie.length);
+    }
   }
   return null;
 }
@@ -59,9 +40,6 @@ function updateWeekSchedule() {
   let updatedValues = getSelectedValues();
 
   // Validate the selected schedule values before proceeding
-  if (!validateScheduleValues(updatedValues)) {
-    return; // Stop execution if validation fails
-  }
 
   console.log(updatedValues);
 
@@ -69,7 +47,7 @@ function updateWeekSchedule() {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      'X-CSRFToken': getCSRFToken(), 
+      "X-CSRFToken": getCSRFToken(),
     },
     body: JSON.stringify(updatedValues),
   })
