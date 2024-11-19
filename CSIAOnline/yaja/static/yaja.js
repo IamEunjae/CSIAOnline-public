@@ -56,7 +56,7 @@ function updateWeekSchedule() {
       console.log(data);
       if (data.status === "success") {
         alert("Successfully changed this week's schedule!");
-        retrieveCurrentSchedule();
+        //retrieveCurrentSchedule();
         window.location.reload();
       } else {
         console.error("Error in updateWeekSchedule: Unexpected response", data);
